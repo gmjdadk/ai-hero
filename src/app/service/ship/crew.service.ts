@@ -47,11 +47,10 @@ export class CrewService {
   ) { }
 
   private annotateCrewWithDesign(crew: Crew): Observable<Crew> {
-    let clone = Object.assign(Object.create(Object.getPrototypeOf(crew)), crew);
     return this.characterDesignService.getCharacterDesignById(crew.CharacterDesignId)
       .map(res => {
-        clone.Design = res.exists? res.design : null;
-        return clone;
+        crew.Design = res.exists? res.design : null;
+        return crew;
       });
   }
 

@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 
 import { CharacterDesignService } from './service/data/character-design.service';
 import { RoomDesignService } from './service/data/room-design.service';
+import { SpriteService } from './service/data/sprite.service';
+import { FileService } from './service/data/file.service';
 import { CrewService } from './service/ship/crew.service';
-import { RoomService } from './service/ship/room.service';
+import { Room, RoomService } from './service/ship/room.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +15,8 @@ import { RoomService } from './service/ship/room.service';
     // Data
     CharacterDesignService,
     RoomDesignService,
+    SpriteService,
+    FileService,
     // Ship
     CrewService,
     RoomService
@@ -20,17 +24,17 @@ import { RoomService } from './service/ship/room.service';
 })
 export class AppComponent {
   title = 'app';
+  private rooms: Room[];
 
   constructor(
     private characterDesignService: CharacterDesignService,
     private roomDesignService: RoomDesignService,
+    private spriteService: SpriteService,
+    private fileService: FileService,
     private crewService: CrewService,
     private roomService: RoomService
   ) {
-    let token: string = '466c13ee-b166-43f1-84ea-80245e927b6c';
-    characterDesignService.getCharacterDesigns().subscribe(c => console.debug(c));
-    roomDesignService.getRoomDesignsMap().subscribe(c => console.debug('rd', c));
-    crewService.getCrewByTokenMap(token).subscribe(c => console.debug('crew', c));
-    roomService.getRoomsByToken(token).subscribe(c => console.debug('rooms', c));
+    let token: string = '';
+    roomService.getRoomsByToken(token).subscribe(c => this.rooms = c);
   }
 }

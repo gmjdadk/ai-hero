@@ -1,0 +1,5 @@
+<ng-container *ngIf="rooms">
+  <ng-container *ngFor="let room of rooms">
+    <room-preview [room]="room"></room-preview>
+  </ng-container>
+</ng-container>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, Exclude, plainToClass } from 'class-transformer';
+import { Sprite, SpriteService } from './sprite.service';
 
 import * as xml from 'pixl-xml';
 import 'rxjs';
@@ -42,6 +43,8 @@ export class RoomDesign {
   @Type(() => Boolean) Rotate: boolean;
   @Type(() => Number) Rows: number;
   @Type(() => Number) UpgradeFromRoomDesignId: number;
+
+  @Exclude() Sprite: Sprite;
 }
 
 @Injectable()
@@ -50,7 +53,18 @@ export class RoomDesignService {
   private roomDesigns: Observable<RoomDesign[]>;
   private roomDesignsMap: Observable<Map<number, RoomDesign>>;
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private spriteService: SpriteService
+  ) { }
+
+  private annotateRoomDesignWithSprite(room: RoomDesign): Observable<RoomDesign> {
+    return this.spriteService.getSpriteById(room.ImageSpriteId)
+      .map(res => {
+        room.Sprite = res.exists? res.sprite : null;
+        return room;
+      });
+  }
 
   getRoomDesigns(): Observable<RoomDesign[]> {
     return this.roomDesigns
@@ -60,6 +74,8 @@ export class RoomDesignService {
         .map(res => xml.parse(res.text()))
         .map(res => res['ListRoomDesigns']['RoomDesigns']['RoomDesign'])
         .map(res => plainToClass(RoomDesign, res as Object[]))
+        .map(res => res.map(c => this.annotateRoomDesignWithSprite(c)))
+        .flatMap(res => Observable.forkJoin(res))
         .publishReplay(1)
         .refCount();
   }

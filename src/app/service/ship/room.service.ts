@@ -33,6 +33,8 @@ export class Room {
 const NON_PASSABLE_ROOMS = ["Wall"];
 // Rooms that allow you to move up and down
 const VERTICAL_PASSABLE_ROOMS = ["Lift"];
+// Rooms with these status should be ignored
+const ROOM_STATUS_IGNORE = ["Inventory"];
 
 @Injectable()
 export class RoomService {
@@ -43,11 +45,10 @@ export class RoomService {
   ) { }
 
   private annotateRoomWithDesign(room: Room): Observable<Room> {
-    let clone = Object.assign(Object.create(Object.getPrototypeOf(room)), room);
     return this.roomDesignService.getRoomDesignById(room.RoomDesignId)
       .map(res => {
-        clone.Design = res.exists? res.design : null;
-        return clone;
+        room.Design = res.exists? res.design : null;
+        return room;
       });
   }
 
@@ -97,6 +98,7 @@ export class RoomService {
       .map(res => xml.parse(res.text()))
       .map(res => res['ListRoomsViaAccessToken']['Rooms']['Room'])
       .map(res => plainToClass(Room, res as Object[]))
+      .map(res => res.filter(c => ROOM_STATUS_IGNORE.indexOf(c.RoomStatus) < 0))
       .map(res => res.map(c => this.annotateRoomWithDesign(c)))
       .flatMap(res => Observable.forkJoin(res))
       .map(res => this.annotateRoomsWithLinks(res));
