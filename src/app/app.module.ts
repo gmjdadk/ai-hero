@@ -6,7 +6,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
-import { APIInterceptorBackend } from './interceptor/api.interceptor';
+import { PixelStarshipsAPIInterceptorBackend } from './interceptor/api/pss-api.interceptor';
 import { ShipPreviewComponent } from './component/preview/ship-preview/ship-preview.component';
 import { RoomPreviewComponent } from './component/preview/room-preview/room-preview.component';
 
@@ -22,7 +22,7 @@ import { RoomPreviewComponent } from './component/preview/room-preview/room-prev
     HttpModule
   ],
   providers: [
-    { provide: XHRBackend, useClass: APIInterceptorBackend }
+    { provide: XHRBackend, useClass: PixelStarshipsAPIInterceptorBackend }
   ],
   bootstrap: [ AppComponent ]
 })

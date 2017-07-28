@@ -6,7 +6,7 @@
 
 :host:hover {
     cursor: pointer;
-    margin: -1px;
+    margin: -2px;
     z-index: 100;
     border: 2px solid yellow;
 }

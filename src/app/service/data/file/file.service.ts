@@ -6,50 +6,38 @@ import * as xml from 'pixl-xml';
 import 'rxjs';
 import { Observable } from 'rxjs';
 
-const AWS_BASE_PATH = '//pixelstarships.s3.amazonaws.com/';
-
-export class File {
-  @Type(() => Number) Id: number;
-  @Type(() => String) Filename: string;
-  @Type(() => Date) DateUpdated: Date;
-  @Type(() => String) FileDownloadCategory: string;
-  @Type(() => String) AwsFilename: string;
-
-  get fullPath() {
-    return AWS_BASE_PATH + this.AwsFilename;
-  }
-}
+import { StaticFile } from '../../../model/data/static-file.model';
 
 @Injectable()
 export class FileService {
   // Data services can be cached as they only change between patches
-  private files: Observable<File[]>;
-  private filesMap: Observable<Map<number, File>>;
+  private files: Observable<StaticFile[]>;
+  private filesMap: Observable<Map<number, StaticFile>>;
 
   constructor(private http: Http) { }
 
-  getFiles(): Observable<File[]> {
+  getFiles(): Observable<StaticFile[]> {
     return this.files
       ? this.files
       : this.files = this.http
         .get('pss:/FileService/ListFiles2?deviceType=DeviceTypeiPhone', {})
         .map(res => xml.parse(res.text()))
         .map(res => res['ListFiles']['Files']['File'])
-        .map(res => plainToClass(File, res as Object[]))
+        .map(res => plainToClass(StaticFile, res as Object[]))
         .publishReplay(1)
         .refCount();
   }
 
-  getFilesMap(): Observable<Map<number, File>> {
+  getFilesMap(): Observable<Map<number, StaticFile>> {
     return this.filesMap
       ? this.filesMap
       : this.filesMap = this.getFiles()
-        .map(res => new Map(res.map(v => [v.Id, v] as [number, File])))
+        .map(res => new Map(res.map(v => [v.Id, v] as [number, StaticFile])))
         .publishReplay(1)
         .refCount();
   }
 
-  getFileById(id: number): Observable<{ exists: boolean, file?: File }> {
+  getFileById(id: number): Observable<{ exists: boolean, file?: StaticFile }> {
     return this.getFilesMap()
       .map(res => res.get(id))
       .map(res => { return { exists: res !== undefined, file: res } });

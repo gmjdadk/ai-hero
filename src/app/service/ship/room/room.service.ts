@@ -2,32 +2,12 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Type, Exclude, plainToClass } from 'class-transformer';
 
-import { RoomDesign, RoomDesignService } from '../data/room-design.service';
+import { RoomDesignService } from '../../data/room-design/room-design.service';
+import { Room } from '../../../model/ship/room.model';
 
 import * as xml from 'pixl-xml';
 import 'rxjs';
 import { Observable } from 'rxjs';
-
-export class Room {
-  @Type(() => Number) CapacityUsed: number;
-  @Type(() => Number) Column: number;
-  @Type(() => Date) ConstructionStartDate: Date;
-  @Type(() => String) ItemIds: string;
-  @Type(() => String) ManufactureItemDesignIds: string;
-  @Type(() => Date) ManufactureStartDate: Date;
-  @Type(() => String) Manufactured: string;
-  @Type(() => Number) PowerGenerated: number;
-  @Type(() => Number) RandomSeed: number;
-  @Type(() => Number) RoomDesignId: number;
-  @Type(() => Number) RoomId: number;
-  @Type(() => String) RoomStatus: string;
-  @Type(() => Number) Row: number;
-  @Type(() => Number) ShipId: number;
-  @Type(() => Number) UpgradeRoomDesignId: number;
-
-  @Exclude() Design: RoomDesign;
-  @Exclude() Links: Room[] = [];
-}
 
 // Rooms you can't walk across
 const NON_PASSABLE_ROOMS = ["Wall"];

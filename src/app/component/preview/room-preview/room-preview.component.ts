@@ -1,7 +1,7 @@
 import { Input, HostBinding, Component, OnInit } from '@angular/core';
 
-import { Room } from '../../../service/ship/room.service';
-import { LayoutService } from '../../../service/preview/layout.service';
+import { Room } from '../../../model/ship/room.model';
+import { LayoutService } from '../../../service/preview/layout/layout.service';
 
 @Component({
   selector: 'room-preview',

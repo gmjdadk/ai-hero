@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 
-import { CharacterDesignService } from './service/data/character-design.service';
-import { RoomDesignService } from './service/data/room-design.service';
-import { ShipDesignService } from './service/data/ship-design.service';
-import { SpriteService } from './service/data/sprite.service';
-import { FileService } from './service/data/file.service';
-import { CrewService } from './service/ship/crew.service';
-import { Room, RoomService } from './service/ship/room.service';
+import { CharacterDesignService } from './service/data/character-design/character-design.service';
+import { RoomDesignService } from './service/data/room-design/room-design.service';
+import { ShipDesignService } from './service/data/ship-design/ship-design.service';
+import { SpriteService } from './service/data/sprite/sprite.service';
+import { FileService } from './service/data/file/file.service';
+
+import { CrewByTokenService } from './service/ship/crew/by-token/crew-by-token.service';
+import { RoomService } from './service/ship/room/room.service';
+
+import { Room } from './model/ship/room.model';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +23,7 @@ import { Room, RoomService } from './service/ship/room.service';
     SpriteService,
     FileService,
     // Ship
-    CrewService,
+    CrewByTokenService,
     RoomService
   ]
 })
@@ -34,7 +37,7 @@ export class AppComponent {
     private shipDesignService: ShipDesignService,
     private spriteService: SpriteService,
     private fileService: FileService,
-    private crewService: CrewService,
+    private crewByTokenService: CrewByTokenService,
     private roomService: RoomService
   ) {
     let token: string = '';

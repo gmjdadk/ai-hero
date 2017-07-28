@@ -1,8 +1,9 @@
 import { Input, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Room, RoomService } from '../../../service/ship/room.service';
-import { LayoutService } from '../../../service/preview/layout.service';
+import { Room } from '../../../model/ship/room.model';
+import { RoomService } from '../../../service/ship/room/room.service';
+import { LayoutService } from '../../../service/preview/layout/layout.service';
 
 @Component({
   selector: 'ship-preview',
