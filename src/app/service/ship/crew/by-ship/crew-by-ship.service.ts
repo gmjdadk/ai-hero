@@ -21,15 +21,5 @@ export abstract class CrewByShipService extends CrewServiceBase {
     super(http, characterDesignService);
   }
 
-  // /UserService/SearchUsers?searchString=Zensi
-  // filter for only users equal query
-
-  // /ShipService/InspectShip?userId=1214765&accessToken=07f72537-5198-4703-8ea2-10fd95c70949
-  // gives all info
-
-/*
-  getCrewByInspection(userId: number): Observable<Crew[]> {
-    TODO
-  }
-*/
+  //
 }

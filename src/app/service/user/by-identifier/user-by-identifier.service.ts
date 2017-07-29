@@ -27,7 +27,7 @@ export class UserByIdentifierService extends UserServiceBase {
       .map(res => [ res['User'], res['Ship'] ])
       .map(res => {
         let [rawUser, rawShip] = res;
-        let user = plainToClass(User, res as Object);
+        let user = plainToClass(User, rawUser as Object);
         user.MetaRawShip = rawShip;
         return user;
       });
