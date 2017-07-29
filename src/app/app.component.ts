@@ -9,6 +9,8 @@ import { FileService } from './service/data/file/file.service';
 import { CrewByTokenService } from './service/ship/crew/by-token/crew-by-token.service';
 import { RoomByTokenService } from './service/ship/room/by-token/room-by-token.service';
 
+import { UserByIdentifierService } from './service/user/by-identifier/user-by-identifier.service';
+
 import { Room } from './model/ship/room.model';
 
 @Component({
@@ -24,7 +26,9 @@ import { Room } from './model/ship/room.model';
     FileService,
     // Ship
     CrewByTokenService,
-    RoomByTokenService
+    RoomByTokenService,
+    // User
+    UserByIdentifierService
   ]
 })
 export class AppComponent {
@@ -38,11 +42,14 @@ export class AppComponent {
     private spriteService: SpriteService,
     private fileService: FileService,
     private crewByTokenService: CrewByTokenService,
-    private roomByTokenService: RoomByTokenService
+    private roomByTokenService: RoomByTokenService,
+    private userByIdService: UserByIdentifierService
   ) {
     let token: string = '';
     shipDesignService.getShipDesigns().subscribe(c => console.log('ships', c));
     roomByTokenService.getRoomsByToken(token).subscribe(c => this.rooms = c);
+
+    userByIdService.getUserByIdentifier(token, 1214765).subscribe(c => console.log('user', c));
 
     // /UserService/GetCurrentUser?accessToken=...
     // gives UserId as property of GetCurrentUser tag
