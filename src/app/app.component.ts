@@ -7,7 +7,7 @@ import { SpriteService } from './service/data/sprite/sprite.service';
 import { FileService } from './service/data/file/file.service';
 
 import { CrewByTokenService } from './service/ship/crew/by-token/crew-by-token.service';
-import { RoomService } from './service/ship/room/room.service';
+import { RoomByTokenService } from './service/ship/room/by-token/room-by-token.service';
 
 import { Room } from './model/ship/room.model';
 
@@ -24,7 +24,7 @@ import { Room } from './model/ship/room.model';
     FileService,
     // Ship
     CrewByTokenService,
-    RoomService
+    RoomByTokenService
   ]
 })
 export class AppComponent {
@@ -38,10 +38,16 @@ export class AppComponent {
     private spriteService: SpriteService,
     private fileService: FileService,
     private crewByTokenService: CrewByTokenService,
-    private roomService: RoomService
+    private roomByTokenService: RoomByTokenService
   ) {
     let token: string = '';
     shipDesignService.getShipDesigns().subscribe(c => console.log('ships', c));
-    roomService.getRoomsByToken(token).subscribe(c => this.rooms = c);
+    roomByTokenService.getRoomsByToken(token).subscribe(c => this.rooms = c);
+
+    // /UserService/GetCurrentUser?accessToken=...
+    // gives UserId as property of GetCurrentUser tag
+
+    // /ShipService/GetShipByUserId?userId=1911163&accessToken=...
+    // gives ShipId
   }
 }

@@ -2,7 +2,6 @@ import { Input, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Room } from '../../../model/ship/room.model';
-import { RoomService } from '../../../service/ship/room/room.service';
 import { LayoutService } from '../../../service/preview/layout/layout.service';
 
 @Component({
@@ -16,9 +15,7 @@ import { LayoutService } from '../../../service/preview/layout/layout.service';
 export class ShipPreviewComponent implements OnInit {
   @Input() rooms: Room[];
 
-  constructor(
-    private roomService: RoomService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
   }

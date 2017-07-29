@@ -12,7 +12,7 @@ import 'rxjs';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export abstract class CrewByInspectionService extends CrewServiceBase {
+export abstract class CrewByUserService extends CrewServiceBase {
 
   constructor(
     http: Http,
@@ -20,6 +20,12 @@ export abstract class CrewByInspectionService extends CrewServiceBase {
   ) {
     super(http, characterDesignService);
   }
+
+  // /UserService/SearchUsers?searchString=Zensi
+  // filter for only users equal query
+
+  // /ShipService/InspectShip?userId=1214765&accessToken=07f72537-5198-4703-8ea2-10fd95c70949
+  // gives all info
 
 /*
   getCrewByInspection(userId: number): Observable<Crew[]> {

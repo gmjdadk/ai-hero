@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Type, Exclude, plainToClass } from 'class-transformer';
+import { plainToClass } from 'class-transformer';
 
-import { RoomDesignService } from '../../data/room-design/room-design.service';
-import { Room } from '../../../model/ship/room.model';
+import { RoomDesignService } from '../../../data/room-design/room-design.service';
+import { Room } from '../../../../model/ship/room.model';
 
 import * as xml from 'pixl-xml';
 import 'rxjs';
@@ -17,10 +17,10 @@ const VERTICAL_PASSABLE_ROOMS = ["Lift"];
 const ROOM_STATUS_IGNORE = ["Inventory"];
 
 @Injectable()
-export class RoomService {
+export abstract class RoomServiceBase {
 
   constructor(
-    private http: Http,
+    protected http: Http,
     private roomDesignService: RoomDesignService
   ) { }
 
@@ -72,20 +72,11 @@ export class RoomService {
     }
   }
 
-  getRoomsByToken(token: string): Observable<Room[]> {
-    return this.http
-      .get('pss:/RoomService/ListRoomsViaAccessToken?accessToken=' + encodeURIComponent(token))
-      .map(res => xml.parse(res.text()))
-      .map(res => res['ListRoomsViaAccessToken']['Rooms']['Room'])
-      .map(res => plainToClass(Room, res as Object[]))
+  protected provideRooms(rooms: Room[]): Observable<Room[]> {
+    return Observable.of(rooms)
       .map(res => res.filter(c => ROOM_STATUS_IGNORE.indexOf(c.RoomStatus) < 0))
       .map(res => res.map(c => this.annotateRoomWithDesign(c)))
       .flatMap(res => Observable.forkJoin(res))
       .map(res => this.annotateRoomsWithLinks(res));
-  }
-
-  getRoomsByTokenMap(token: string): Observable<Map<number, Room>> {
-    return this.getRoomsByToken(token)
-      .map(res => new Map(res.map(v => [v.RoomId, v] as [number, Room])))
   }
 }

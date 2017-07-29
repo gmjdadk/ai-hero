@@ -8,7 +8,7 @@ import * as xml from 'pixl-xml';
 import 'rxjs';
 import { Observable } from 'rxjs';
 
-export class CrewServiceBase {
+export abstract class CrewServiceBase {
 
   constructor(
     protected http: Http,
