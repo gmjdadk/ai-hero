@@ -4,5 +4,5 @@ import { Ship } from '../ship/ship.model';
 export class User {
   @Type(() => Number) UserId: number;
 
-  @Exclude() Ship: Ship;
+  @Exclude() MetaRawShip: Object; // Used for meta-inf
 }
