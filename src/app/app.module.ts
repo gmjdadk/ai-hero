@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { HttpModule, XHRBackend } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -19,6 +20,7 @@ import { RoomPreviewComponent } from './component/preview/room-preview/room-prev
   imports: [
     BrowserModule,
     CommonModule,
+    FormsModule,
     HttpModule
   ],
   providers: [

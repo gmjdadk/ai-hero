@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { plainToClass } from 'class-transformer';
 
+import { ShipDesignService } from '../../../data/ship-design/ship-design.service';
 import { User } from '../../../../model/user/user.model';
 import { Ship } from '../../../../model/ship/ship.model';
 
@@ -15,9 +16,10 @@ import { Observable } from 'rxjs';
 export class ShipByUserService extends ShipServiceBase {
 
   constructor(
-    protected http: Http
+    http: Http,
+    shipDesignService: ShipDesignService
   ) {
-    super(http);
+    super(http, shipDesignService);
   }
 
   getShipByUser(user: User): Observable<Ship> {
@@ -28,6 +30,7 @@ export class ShipByUserService extends ShipServiceBase {
         ship.MetaRawCharacters = raw['Characters']['Character'];
         ship.MetaRawRooms = raw['Rooms']['Room'];
         return ship;
-      });
+      })
+      .flatMap(res => this.provideShip(res));
   }
 }

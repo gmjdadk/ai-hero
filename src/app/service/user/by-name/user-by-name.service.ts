@@ -26,7 +26,7 @@ export class UserByNameService extends UserServiceBase {
       .get('pss:/UserService/SearchUsers?searchString=' + encodeURIComponent(name))
       .map(res => xml.parse(res.text()))
       .map(res => res['SearchUsers']['Users']['User'])
-      .map(res => res.filter(u => u['Name'] === name))
+      .map(res => (Array.isArray(res)? res : [res]).filter(u => u['Name'] === name))
       .map(res => parseInt(res[0]['Id']))
       .flatMap(id => this.userByIdentifierService.getUserByIdentifier(token, id));
   }

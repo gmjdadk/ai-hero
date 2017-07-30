@@ -1,4 +1,5 @@
-import { Type } from 'class-transformer';
+import { Exclude, Type } from 'class-transformer';
+import { StaticSprite } from './static-sprite.model';
 
 export class ShipDesign {
   @Type(() => Boolean) AllowInteracial: boolean;
@@ -45,4 +46,7 @@ export class ShipDesign {
   @Type(() => Number) UpgradeOffsetColumns: number;
   @Type(() => Number) UpgradeOffsetRows: number;
   @Type(() => Number) UpgradeTime: number;
+
+  @Exclude() BackgroundSprite: StaticSprite;
+  @Exclude() ForegroundSprite: StaticSprite;
 }

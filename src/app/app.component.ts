@@ -14,7 +14,9 @@ import { ShipByUserService } from './service/ship/ship/by-user/ship-by-user.serv
 import { UserByIdentifierService } from './service/user/by-identifier/user-by-identifier.service';
 import { UserByNameService } from './service/user/by-name/user-by-name.service';
 
-import { Room } from './model/ship/room.model';
+import { Ship } from './model/ship/ship.model';
+
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -39,7 +41,10 @@ import { Room } from './model/ship/room.model';
 })
 export class AppComponent {
   title = 'app';
-  private rooms: Room[];
+  private ship: Ship;
+  
+  private userSearch: string;
+  private userSearchSubject: Subject<string> = new Subject<string>();
 
   constructor(
     private characterDesignService: CharacterDesignService,
@@ -55,24 +60,19 @@ export class AppComponent {
     private userByNameService: UserByNameService
   ) {
     let token: string = '';
-    shipDesignService.getShipDesigns().subscribe(c => console.log('ships', c));
-    //roomByTokenService.getRoomsByToken(token).subscribe(c => this.rooms = c);
-    /*
-    userByIdService.getUserByIdentifier(token, 1214765)
-      .flatMap(res => { console.log('user', res); return shipByUserService.getShipByUser(res) })
-      .subscribe(res => console.log('ship by user', res));
-    */
 
-    userByNameService.getUserByName(token, 'Zensi')
+    this.userSearchSubject
+      .debounceTime(300)
+      .switchMap(uname => userByNameService.getUserByName(token, uname))
       .flatMap(res => this.shipByUserService.getShipByUser(res))
-      .flatMap(res => this.roomByShipService.getRoomsByShip(res))
-      .subscribe(c => this.rooms = c);
-      //.subscribe(c => console.log('ship byname', c))
+      .subscribe(ship => this.ship = ship);
 
-    // /UserService/GetCurrentUser?accessToken=...
-    // gives UserId as property of GetCurrentUser tag
+    this.userSearchChanged('White Worf');
+  }
 
-    // /ShipService/GetShipByUserId?userId=1911163&accessToken=...
-    // gives ShipId
+  userSearchChanged(value: string) {
+    console.log(value);
+    this.userSearch = value;
+    this.userSearchSubject.next(this.userSearch);
   }
 }

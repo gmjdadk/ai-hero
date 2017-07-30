@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Type, plainToClass } from 'class-transformer';
+import { SpriteService } from '../sprite/sprite.service';
 
 import * as xml from 'pixl-xml';
 import 'rxjs';
@@ -14,7 +15,22 @@ export class ShipDesignService {
   private shipDesigns: Observable<ShipDesign[]>;
   private shipDesignsMap: Observable<Map<number, ShipDesign>>;
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private spriteService: SpriteService
+  ) { }
+
+  private annotateShipDesignWithSprites(ship: ShipDesign): Observable<ShipDesign> {
+    return Observable.forkJoin([
+        this.spriteService.getSpriteById(ship.InteriorSpriteId),
+        this.spriteService.getSpriteById(ship.ExteriorSpriteId)
+      ]).map(res => {
+        let [interior, exterior] = res;
+        ship.BackgroundSprite = interior.exists? interior.sprite : null;
+        ship.ForegroundSprite = interior.exists? interior.sprite : null;
+        return ship;
+      });
+  }
 
   getShipDesigns(): Observable<ShipDesign[]> {
     return this.shipDesigns
@@ -24,6 +40,8 @@ export class ShipDesignService {
         .map(res => xml.parse(res.text()))
         .map(res => res['ListShipDesigns']['ShipDesigns']['ShipDesign'])
         .map(res => plainToClass(ShipDesign, res as Object[]))
+        .map(res => res.map(c => this.annotateShipDesignWithSprites(c)))
+        .flatMap(res => Observable.forkJoin(res))
         .publishReplay(1)
         .refCount();
   }

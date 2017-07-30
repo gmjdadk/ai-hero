@@ -1,6 +1,5 @@
 import { Type, Exclude } from 'class-transformer';
-import { Room } from './room.model';
-import { Crew } from './crew.model';
+import { ShipDesign } from '../data/ship-design.model';
 
 export class Ship {
   @Type(() => Number) BrightnessValue: number;
@@ -24,6 +23,8 @@ export class Ship {
   @Type(() => Number) UpgradeShipDesignId: number;
   @Type(() => Date) UpgradeStartDate: Date;
   @Type(() => Number) UserId: number;
+
+  @Exclude() Design: ShipDesign;
 
   @Exclude() MetaRawRooms: Object[];
   @Exclude() MetaRawCharacters: Object[];
