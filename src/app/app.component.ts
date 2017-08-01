@@ -14,9 +14,12 @@ import { ShipByUserService } from './service/ship/ship/by-user/ship-by-user.serv
 import { UserByIdentifierService } from './service/user/by-identifier/user-by-identifier.service';
 import { UserByNameService } from './service/user/by-name/user-by-name.service';
 
+import { LocalAdministeredMacService } from './service/device/mac/lam.service';
+import { TokenByLamService } from './service/token/by-lam/token-by-lam.service';
+
 import { Ship } from './model/ship/ship.model';
 
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +39,11 @@ import { Subject } from 'rxjs';
     ShipByUserService,
     // User
     UserByIdentifierService,
-    UserByNameService
+    UserByNameService,
+    // Device
+    LocalAdministeredMacService,
+    // Token
+    TokenByLamService
   ]
 })
 export class AppComponent {
@@ -57,13 +64,15 @@ export class AppComponent {
     private roomByShipService: RoomByShipService,
     private shipByUserService: ShipByUserService,
     private userByIdService: UserByIdentifierService,
-    private userByNameService: UserByNameService
+    private userByNameService: UserByNameService,
+    private tokenByLamService: TokenByLamService
   ) {
-    let token: string = '';
+    let tokenObs: Observable<string> = tokenByLamService.getTokenByLam().publishReplay(1);
 
     this.userSearchSubject
-      .debounceTime(300)
-      .switchMap(uname => userByNameService.getUserByName(token, uname))
+      .debounceTime(350)
+      .zip(tokenObs)
+      .switchMap(res => { let [uname, token] = res; return userByNameService.getUserByName(token, uname); })
       .flatMap(res => this.shipByUserService.getShipByUser(res))
       .subscribe(ship => this.ship = ship);
 
@@ -71,7 +80,6 @@ export class AppComponent {
   }
 
   userSearchChanged(value: string) {
-    console.log(value);
     this.userSearch = value;
     this.userSearchSubject.next(this.userSearch);
   }
