@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, XHRBackend } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgSpinKitModule } from 'ng-spin-kit'
 import { PersistenceModule, PersistenceService } from 'angular-persistence';
 
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { RoomPreviewComponent } from './component/preview/room-preview/room-prev
     CommonModule,
     FormsModule,
     HttpModule,
+    NgSpinKitModule,
     PersistenceModule
   ],
   providers: [

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { PersistentHttpService } from '../../http/persistent/persistent-http.service';
 import { Type, plainToClass } from 'class-transformer';
 
 import * as xml from 'pixl-xml';
@@ -14,7 +14,7 @@ export class FileService {
   private files: Observable<StaticFile[]>;
   private filesMap: Observable<Map<number, StaticFile>>;
 
-  constructor(private http: Http) { }
+  constructor(private http: PersistentHttpService) { }
 
   preloadCommons(): Observable<{}> {
     return this.getFilesMap().flatMap(_ => Observable.empty());
@@ -24,7 +24,7 @@ export class FileService {
     return this.files
       ? this.files
       : this.files = this.http
-        .get('pss:/FileService/ListFiles2?deviceType=DeviceTypeiPhone', {})
+        .get('x-cache:43200,pss:/FileService/ListFiles2?deviceType=DeviceTypeiPhone', {})
         .map(res => xml.parse(res.text()))
         .map(res => res['ListFiles']['Files']['File'])
         .map(res => plainToClass(StaticFile, res as Object[]))

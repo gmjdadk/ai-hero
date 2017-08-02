@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { PersistentHttpService } from '../../http/persistent/persistent-http.service';
 import { Type, plainToClass } from 'class-transformer';
 import { SpriteService } from '../sprite/sprite.service';
 
@@ -16,7 +16,7 @@ export class ShipDesignService {
   private shipDesignsMap: Observable<Map<number, ShipDesign>>;
 
   constructor(
-    private http: Http,
+    private http: PersistentHttpService,
     private spriteService: SpriteService
   ) { }
 
@@ -40,7 +40,7 @@ export class ShipDesignService {
     return this.shipDesigns
       ? this.shipDesigns
       : this.shipDesigns = this.http
-        .get('pss:/ShipService/ListAllShipDesigns2?languageKey=en', {})
+        .get('x-cache:43200,pss:/ShipService/ListAllShipDesigns2?languageKey=en', {})
         .map(res => xml.parse(res.text()))
         .map(res => res['ListShipDesigns']['ShipDesigns']['ShipDesign'])
         .map(res => plainToClass(ShipDesign, res as Object[]))

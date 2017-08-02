@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { PersistenceService, StorageType } from 'angular-persistence';
 
-const TWELVE_HOURS_MS = 12 * 60 * 60 * Math.pow(10, 3);
+const DEFAULT_CACHE_TIME = 12 * 60 * 60 * Math.pow(10, 3); // 12 hrs
 
 @Injectable()
 export class PersistentHttpService extends Http {
@@ -20,19 +20,19 @@ export class PersistentHttpService extends Http {
   }
 
   request(url: string|Request, options?: RequestOptionsArgs): Observable<Response> {
-    // Look for urls in the format x-cache,protocol://... to intercept
+    // Look for urls in the format x-cache:seconds,protocol://... to intercept
     // Don't attempt to cache otherwise
     let uri = typeof url === 'string' ? url : url.url;
-    let uriComponents = /^x-cache,(.*)$/.exec(uri);
-    return !uriComponents || uriComponents.length < 2
+    let uriComponents = /^x-cache:(\d+),(.*)$/.exec(uri);
+    return !uriComponents || uriComponents.length < 3
       ? super.request(url, options)
       : this.persistenceService
-        .createCache("http-cache::" + encodeURI(uriComponents[1]),
+        .createCache("http-cache::" + encodeURI(uriComponents[2]),
           // Response is broken up for storage
-          () => super.request(uriComponents[1], options).map(
+          () => super.request(uriComponents[2], options).map(
               req => { return {
                 body: req.text(), status: req.status, headers: req.headers.toJSON(), statusText: req.statusText, type: req.type, url: req.url } }),
-          { type: StorageType.LOCAL, expireAfter: TWELVE_HOURS_MS })
+          { type: StorageType.LOCAL, expireAfter: parseInt(uriComponents[1]) * 1000 || DEFAULT_CACHE_TIME })
         .get()
         // ... and then put back together again
         .map(res => {

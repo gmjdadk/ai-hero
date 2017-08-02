@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { PersistentHttpService } from './service/http/persistent/persistent-http.service';
+
 import { CharacterDesignService } from './service/data/character-design/character-design.service';
 import { RoomDesignService } from './service/data/room-design/room-design.service';
 import { ShipDesignService } from './service/data/ship-design/ship-design.service';
@@ -26,6 +28,7 @@ import { Subject, Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   providers: [
+    PersistentHttpService,
     // Data
     CharacterDesignService,
     RoomDesignService,
@@ -80,7 +83,9 @@ export class AppComponent {
 
     this.userSearchSubject
       .debounceTime(250)
+      .map(res => res.trim())
       .distinctUntilChanged()
+      .do(() => this.ship = null)
       .combineLatest(tokenObs, (uname, token) => { return { uname: uname, token: token } })
       .flatMap(res => this.userByNameService.getUserByName(res.token, res.uname))
       .switchMap(res => res.exists? this.shipByUserService.getShipByUser(res.user) : Observable.of(null))

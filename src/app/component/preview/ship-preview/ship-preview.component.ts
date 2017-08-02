@@ -50,6 +50,6 @@ export class ShipPreviewComponent implements OnInit {
 
   @HostBinding('style.backgroundImage')
   get renderBackgroundImage(): string {
-    return 'url(' + this.ship.Design.BackgroundSprite.File.fullPath + ')';
+    return 'url("' + this.ship.Design.BackgroundSprite.File.fullPath + '")';
   }
 }

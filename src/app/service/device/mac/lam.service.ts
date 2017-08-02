@@ -9,7 +9,7 @@ const ONE_WEEK_MS = 60 * 60 * 24 * 1 * Math.pow(10, 3);
 export class LocalAdministeredMacService {
 
   constructor(
-    private persistanceService: PersistenceService
+    private persistenceService: PersistenceService
   ) { }
 
   // https://serverfault.com/questions/40712/what-range-of-mac-addresses-can-i-safely-use-for-my-virtual-machines
@@ -20,7 +20,7 @@ export class LocalAdministeredMacService {
   }
 
   getAssignedLam(): Observable<string> {
-    return this.persistanceService.createCache("client-lam",
+    return this.persistenceService.createCache("client-lam",
       () => Observable.of(this.mkLocallyAdministeredMac()),
       { type: StorageType.LOCAL, expireAfter: ONE_WEEK_MS }).get();
   }

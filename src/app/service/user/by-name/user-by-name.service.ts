@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { PersistentHttpService } from '../../http/persistent/persistent-http.service';
 import { plainToClass } from 'class-transformer';
 
 import { User } from '../../../model/user/user.model';
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 export class UserByNameService extends UserServiceBase {
 
   constructor(
-    protected http: Http,
+    protected http: PersistentHttpService,
     private userByIdentifierService: UserByIdentifierService
   ) {
     super(http);
@@ -23,7 +23,7 @@ export class UserByNameService extends UserServiceBase {
 
   getUserByName(token: string, name: string): Observable<{exists: boolean, user?: User}> {
     return this.http
-      .get('pss:/UserService/SearchUsers?searchString=' + encodeURIComponent(name))
+      .get('x-cache:60,pss:/UserService/SearchUsers?searchString=' + encodeURIComponent(name))
       .map(res => xml.parse(res.text()))
       .map(res => res['SearchUsers']['Users']['User'])
       .map(res => (Array.isArray(res)? res : [res]).filter(u => u['Name'] === name))

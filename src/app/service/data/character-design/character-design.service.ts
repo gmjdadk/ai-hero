@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { PersistentHttpService } from '../../http/persistent/persistent-http.service';
 import { plainToClass } from 'class-transformer';
 import { PersistenceService, StorageType } from 'angular-persistence';
 
@@ -15,7 +15,7 @@ export class CharacterDesignService {
   private characterDesigns: Observable<CharacterDesign[]>;
   private characterDesignsMap: Observable<Map<number, CharacterDesign>>;
 
-  constructor(private http: Http) { }
+  constructor(private http: PersistentHttpService) { }
 
   preloadCommons(): Observable<{}> {
     return this.getCharacterDesignsMap().flatMap(_ => Observable.empty());
@@ -25,7 +25,7 @@ export class CharacterDesignService {
     return this.characterDesigns
       ? this.characterDesigns
       : this.characterDesigns = this.http
-        .get('pss:/CharacterService/ListAllCharacterDesigns2?languageKey=en', {})
+        .get('x-cache,pss:/CharacterService/ListAllCharacterDesigns2?languageKey=en', {})
         .map(res => xml.parse(res.text()))
         .map(res => res['ListAllCharacterDesigns']['CharacterDesigns']['CharacterDesign'])
         .map(res => plainToClass(CharacterDesign, res as Object[]))
