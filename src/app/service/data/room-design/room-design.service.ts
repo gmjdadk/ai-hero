@@ -20,6 +20,10 @@ export class RoomDesignService {
     private spriteService: SpriteService
   ) { }
 
+  preloadCommons(): Observable<{}> {
+    return this.getRoomDesignsMap().flatMap(_ => Observable.empty());
+  }
+
   private annotateRoomDesignWithSprite(room: RoomDesign): Observable<RoomDesign> {
     return this.spriteService.getSpriteById(room.ImageSpriteId)
       .map(res => {

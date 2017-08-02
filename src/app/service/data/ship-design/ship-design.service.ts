@@ -20,6 +20,10 @@ export class ShipDesignService {
     private spriteService: SpriteService
   ) { }
 
+  preloadCommons(): Observable<{}> {
+    return this.getShipDesignsMap().flatMap(_ => Observable.empty());
+  }
+
   private annotateShipDesignWithSprites(ship: ShipDesign): Observable<ShipDesign> {
     return Observable.forkJoin([
         this.spriteService.getSpriteById(ship.InteriorSpriteId),

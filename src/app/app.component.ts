@@ -47,7 +47,6 @@ import { Subject, Observable } from 'rxjs';
   ]
 })
 export class AppComponent {
-  title = 'app';
   private ship: Ship;
   
   private userSearch: string;
@@ -69,12 +68,22 @@ export class AppComponent {
   ) {
     let tokenObs: Observable<string> = tokenByLamService.getTokenByLam();
 
+    // preload
+    Observable.forkJoin([
+      characterDesignService.preloadCommons(),
+      fileService.preloadCommons(),
+      roomDesignService.preloadCommons(),
+      shipDesignService.preloadCommons(),
+      spriteService.preloadCommons()
+    ])
+    .subscribe();
+
     this.userSearchSubject
       .debounceTime(250)
       .distinctUntilChanged()
       .combineLatest(tokenObs, (uname, token) => { return { uname: uname, token: token } })
       .flatMap(res => this.userByNameService.getUserByName(res.token, res.uname))
-      .flatMap(res => this.shipByUserService.getShipByUser(res))
+      .switchMap(res => res.exists? this.shipByUserService.getShipByUser(res.user) : Observable.of(null))
       .subscribe(ship => this.ship = ship);
     
     this.userSearchChanged('White Worf');

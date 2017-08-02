@@ -3,7 +3,7 @@ import { PersistenceService, StorageType } from 'angular-persistence';
 
 import { Observable } from 'rxjs';
 
-const ONE_WEEK_MS = 60 * 60 * 24 * 1 * 10^3;
+const ONE_WEEK_MS = 60 * 60 * 24 * 1 * Math.pow(10, 3);
 
 @Injectable()
 export class LocalAdministeredMacService {

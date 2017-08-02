@@ -16,6 +16,10 @@ export class FileService {
 
   constructor(private http: Http) { }
 
+  preloadCommons(): Observable<{}> {
+    return this.getFilesMap().flatMap(_ => Observable.empty());
+  }
+
   getFiles(): Observable<StaticFile[]> {
     return this.files
       ? this.files

@@ -21,13 +21,14 @@ export class UserByNameService extends UserServiceBase {
     super(http);
   }
 
-  getUserByName(token: string, name: string): Observable<User> {
+  getUserByName(token: string, name: string): Observable<{exists: boolean, user?: User}> {
     return this.http
       .get('pss:/UserService/SearchUsers?searchString=' + encodeURIComponent(name))
       .map(res => xml.parse(res.text()))
       .map(res => res['SearchUsers']['Users']['User'])
       .map(res => (Array.isArray(res)? res : [res]).filter(u => u['Name'] === name))
       .map(res => parseInt(res[0]['Id']))
-      .flatMap(id => this.userByIdentifierService.getUserByIdentifier(token, id));
+      .flatMap(uid => this.userByIdentifierService.getUserByIdentifier(token, uid))
+      .catch(err => Observable.of({ exists: false }));
   }
 }

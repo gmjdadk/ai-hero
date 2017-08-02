@@ -19,7 +19,7 @@ export class UserByIdentifierService extends UserServiceBase {
     super(http);
   }
 
-  getUserByIdentifier(token: string, uid: number): Observable<User> {
+  getUserByIdentifier(token: string, uid: number): Observable<{exists: boolean, user?: User}> {
     return this.http
       .get('pss:/ShipService/InspectShip?userId=' + encodeURIComponent(uid.toString()) + '&accessToken=' + encodeURIComponent(token))
       .map(res => xml.parse(res.text()))
@@ -30,6 +30,8 @@ export class UserByIdentifierService extends UserServiceBase {
         let user = plainToClass(User, rawUser as Object);
         user.MetaRawShip = rawShip;
         return user;
-      });
+      })
+      .map(res => { return { exists: true, user: res } })
+      .catch(err => Observable.of({ exists: false }));
   }
 }

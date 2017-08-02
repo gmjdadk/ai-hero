@@ -17,6 +17,10 @@ export class CharacterDesignService {
 
   constructor(private http: Http) { }
 
+  preloadCommons(): Observable<{}> {
+    return this.getCharacterDesignsMap().flatMap(_ => Observable.empty());
+  }
+
   getCharacterDesigns(): Observable<CharacterDesign[]> {
     return this.characterDesigns
       ? this.characterDesigns

@@ -20,6 +20,10 @@ export class SpriteService {
     private fileService: FileService
   ) { }
 
+  preloadCommons(): Observable<{}> {
+    return this.getSpritesMap().flatMap(_ => Observable.empty());
+  }
+
   private annotateSpriteWithSourceFile(sprite: StaticSprite): Observable<StaticSprite> {
     return this.fileService.getFileById(sprite.ImageFileId)
       .map(res => {
