@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, XHRBackend } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { PersistenceModule, PersistenceService } from 'angular-persistence';
 
 import { AppComponent } from './app.component';
 
@@ -21,10 +22,12 @@ import { RoomPreviewComponent } from './component/preview/room-preview/room-prev
     BrowserModule,
     CommonModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    PersistenceModule
   ],
   providers: [
-    { provide: XHRBackend, useClass: PixelStarshipsAPIInterceptorBackend }
+    { provide: XHRBackend, useClass: PixelStarshipsAPIInterceptorBackend },
+    PersistenceService
   ],
   bootstrap: [ AppComponent ]
 })

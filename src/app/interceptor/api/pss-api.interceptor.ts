@@ -16,9 +16,6 @@ export class PixelStarshipsAPIInterceptorBackend extends XHRBackend {
       // req.headers.set('User-Agent', API_USER_AGENT);
       // Add current API base url
       req.url = API_BASE_URL + urlComponent[1];
-      // Patch angular to not send pre-flight
-      req.headers.set('Accept', '*/*');
-      req.headers.set('Content-Type', 'text/plain');
     }
     return super.createConnection(req);
   }

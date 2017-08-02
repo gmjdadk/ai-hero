@@ -67,15 +67,16 @@ export class AppComponent {
     private userByNameService: UserByNameService,
     private tokenByLamService: TokenByLamService
   ) {
-    let tokenObs: Observable<string> = tokenByLamService.getTokenByLam().publishReplay(1);
+    let tokenObs: Observable<string> = tokenByLamService.getTokenByLam();
 
     this.userSearchSubject
-      .debounceTime(350)
-      .zip(tokenObs)
-      .switchMap(res => { let [uname, token] = res; return userByNameService.getUserByName(token, uname); })
+      .debounceTime(250)
+      .distinctUntilChanged()
+      .combineLatest(tokenObs, (uname, token) => { return { uname: uname, token: token } })
+      .flatMap(res => this.userByNameService.getUserByName(res.token, res.uname))
       .flatMap(res => this.shipByUserService.getShipByUser(res))
       .subscribe(ship => this.ship = ship);
-
+    
     this.userSearchChanged('White Worf');
   }
 

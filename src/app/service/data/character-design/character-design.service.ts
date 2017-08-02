@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { plainToClass } from 'class-transformer';
+import { PersistenceService, StorageType } from 'angular-persistence';
 
 import * as xml from 'pixl-xml';
 import 'rxjs';
