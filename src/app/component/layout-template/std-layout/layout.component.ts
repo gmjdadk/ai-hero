@@ -7,7 +7,7 @@ export * from './footer/footer.component';
 @Component({
   selector: 'seer-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css']
+  styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
 
