@@ -1,3 +1,4 @@
-<p>
-  user works!
-</p>
+<div class="wrap">
+  <sk-cube-grid *ngIf="!ship"></sk-cube-grid>
+  <ship-preview *ngIf="ship" [ship]="ship"></ship-preview>
+</div>

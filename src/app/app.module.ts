@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, XHRBackend } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgSpinKitModule } from 'ng-spin-kit'
 import { PersistenceModule, PersistenceService } from 'angular-persistence';
 
 import { LayoutTemplateModule } from './component/layout-template/layout-template.module';
@@ -18,6 +17,9 @@ import { SeerUserModule } from './component/route/user/user.module';
 import { SeerFilterAllModule } from './component/route/filter-all/filter-all.module';
 import { SeerFilterTop100Module } from './component/route/filter-top100/filter-top100.module';
 
+import { TokenByLamService } from './service/token/by-lam/token-by-lam.service';
+import { LocalAdministeredMacService } from './service/device/mac/lam.service';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -28,7 +30,6 @@ import { SeerFilterTop100Module } from './component/route/filter-top100/filter-t
     CommonModule,
     FormsModule,
     HttpModule,
-    NgSpinKitModule,
     PersistenceModule,
     // Local
     AppRoutingModule,
@@ -39,7 +40,9 @@ import { SeerFilterTop100Module } from './component/route/filter-top100/filter-t
   ],
   providers: [
     { provide: XHRBackend, useClass: PixelStarshipsAPIInterceptorBackend },
-    PersistenceService
+    PersistenceService,
+    TokenByLamService,
+    LocalAdministeredMacService
   ],
   bootstrap: [ AppComponent ]
 })

@@ -16,9 +16,6 @@ import { ShipByUserService } from './service/ship/ship/by-user/ship-by-user.serv
 import { UserByIdentifierService } from './service/user/by-identifier/user-by-identifier.service';
 import { UserByNameService } from './service/user/by-name/user-by-name.service';
 
-import { LocalAdministeredMacService } from './service/device/mac/lam.service';
-import { TokenByLamService } from './service/token/by-lam/token-by-lam.service';
-
 import { Ship } from './model/ship/ship.model';
 
 import { Subject, Observable } from 'rxjs';
@@ -44,9 +41,9 @@ import { Subject, Observable } from 'rxjs';
     UserByIdentifierService,
     UserByNameService,
     // Device
-    LocalAdministeredMacService,
+    //LocalAdministeredMacService,
     // Token
-    TokenByLamService
+    //TokenByLamService
   ]
 })
 export class AppComponent {
@@ -66,10 +63,9 @@ export class AppComponent {
     private roomByShipService: RoomByShipService,
     private shipByUserService: ShipByUserService,
     private userByIdService: UserByIdentifierService,
-    private userByNameService: UserByNameService,
-    private tokenByLamService: TokenByLamService
+    private userByNameService: UserByNameService
   ) {
-    let tokenObs: Observable<string> = tokenByLamService.getTokenByLam();
+    //let tokenObs: Observable<string> = tokenByLamService.getTokenByLam();
 
     // preload
     Observable.forkJoin([
@@ -80,7 +76,7 @@ export class AppComponent {
       spriteService.preloadCommons()
     ])
     .subscribe();
-
+    /*
     this.userSearchSubject
       .debounceTime(250)
       .map(res => res.trim())
@@ -90,8 +86,7 @@ export class AppComponent {
       .flatMap(res => this.userByNameService.getUserByName(res.token, res.uname))
       .switchMap(res => res.exists? this.shipByUserService.getShipByUser(res.user) : Observable.of(null))
       .subscribe(ship => this.ship = ship);
-
-
+      */
     // TODO
     // Header, Content, Footer, Layout components
     // Top 100 data service

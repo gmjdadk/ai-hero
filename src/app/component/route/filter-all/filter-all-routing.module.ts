@@ -5,7 +5,8 @@ import { FilterAllComponent } from './filter-all.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: '', component: FilterAllComponent }
+      { path: '', redirectTo: '/all', pathMatch: 'full' },
+      { path: 'all', component: FilterAllComponent }
     ])
   ],
   exports: [RouterModule]

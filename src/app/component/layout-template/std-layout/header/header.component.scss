@@ -4,6 +4,7 @@
     width: 100vw;
     top: 0;
     height: 8rem;
+    z-index: 10;
 }
 
 :host /deep/ > * {

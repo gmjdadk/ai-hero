@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgSpinKitModule } from 'ng-spin-kit';
 import { UserComponent } from './user.component';
 import { UserRoutingModule } from './user-routing.module';
 
@@ -10,6 +11,7 @@ import { RoomPreviewComponent } from './preview/room-preview/room-preview.compon
 @NgModule({
   imports: [
     CommonModule,
+    NgSpinKitModule,
     UserRoutingModule
   ],
   declarations: [
