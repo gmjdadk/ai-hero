@@ -11,8 +11,7 @@ export class PixelStarshipsAPIInterceptorBackend extends XHRBackend {
     // Look for requests to the meta-protocol pss://
     let urlComponent = /^pss:\/?(.*)$/.exec(req.url);
     if (urlComponent !== null && urlComponent.length >= 2) {
-      // Add custom headers
-      // FIXME: Adding client emulation header triggers CORS, server doesn't support
+      // Add custom headers - but server doesn't support CORS
       // req.headers.set('User-Agent', API_USER_AGENT);
       // Add current API base url
       req.url = API_BASE_URL + urlComponent[1];
