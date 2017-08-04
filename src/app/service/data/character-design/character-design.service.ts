@@ -25,7 +25,7 @@ export class CharacterDesignService {
     return this.characterDesigns
       ? this.characterDesigns
       : this.characterDesigns = this.http
-        .get('x-cache,pss:/CharacterService/ListAllCharacterDesigns2?languageKey=en', {})
+        .get('x-cache:43200,pss:/CharacterService/ListAllCharacterDesigns2?languageKey=en', {})
         .map(res => xml.parse(res.text()))
         .map(res => res['ListAllCharacterDesigns']['CharacterDesigns']['CharacterDesign'])
         .map(res => plainToClass(CharacterDesign, res as Object[]))

@@ -90,6 +90,21 @@ export class AppComponent {
       .flatMap(res => this.userByNameService.getUserByName(res.token, res.uname))
       .switchMap(res => res.exists? this.shipByUserService.getShipByUser(res.user) : Observable.of(null))
       .subscribe(ship => this.ship = ship);
+
+
+    // TODO
+    // Header, Content, Footer, Layout components
+    // Top 100 data service
+
+
+    // <User name>                       ALL     TOP 100
+
+    // Routes
+    // All:     /?q
+    // Top100:  /top100?q=
+    // View:    /user/:id
+
+    // After a small period of time, if no search is made, White Worf is typed into the search bar
     
     this.userSearchChanged('White Worf');
   }

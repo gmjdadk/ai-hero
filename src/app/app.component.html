@@ -1,3 +1,5 @@
 <input type="text" [ngModel]="userSearch" (ngModelChange)="userSearchChanged($event)" />
-<sk-cube-grid *ngIf="!ship"></sk-cube-grid>
-<ship-preview *ngIf="ship" [ship]="ship"></ship-preview>
+<div class="wrap">
+  <sk-cube-grid *ngIf="!ship"></sk-cube-grid>
+  <ship-preview *ngIf="ship" [ship]="ship"></ship-preview>
+</div>

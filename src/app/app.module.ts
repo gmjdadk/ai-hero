@@ -7,25 +7,37 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgSpinKitModule } from 'ng-spin-kit'
 import { PersistenceModule, PersistenceService } from 'angular-persistence';
 
+import { LayoutTemplateModule } from './component/layout-template/layout-template.module';
+
 import { AppComponent } from './app.component';
 
 import { PixelStarshipsAPIInterceptorBackend } from './interceptor/api/pss-api.interceptor';
 import { ShipPreviewComponent } from './component/preview/ship-preview/ship-preview.component';
 import { RoomPreviewComponent } from './component/preview/room-preview/room-preview.component';
 
+import { FilterAllRouteComponent } from './component/route/filter-all-route/filter-all-route.component';
+import { FilterTop100RouteComponent } from './component/route/filter-top100-route/filter-top100-route.component';
+import { UserRouteComponent } from './component/route/user-route/user-route.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     ShipPreviewComponent,
-    RoomPreviewComponent
+    RoomPreviewComponent,
+    FilterAllRouteComponent,
+    FilterTop100RouteComponent,
+    UserRouteComponent
   ],
   imports: [
+    // Packages
     BrowserModule,
     CommonModule,
     FormsModule,
     HttpModule,
     NgSpinKitModule,
-    PersistenceModule
+    PersistenceModule,
+    // Local
+    LayoutTemplateModule
   ],
   providers: [
     { provide: XHRBackend, useClass: PixelStarshipsAPIInterceptorBackend },
