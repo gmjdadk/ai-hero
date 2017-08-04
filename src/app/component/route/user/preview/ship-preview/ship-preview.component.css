@@ -1,0 +1,12 @@
+:host {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    transform-origin: 0;
+    animation: ship_dropin .5s ease-in-out forwards;
+}
+
+@keyframes ship_dropin {
+    from { opacity: 0; top: -50px; }
+    to   { opacity: 1; top: 0 }
+}

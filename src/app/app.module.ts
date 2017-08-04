@@ -10,23 +10,17 @@ import { PersistenceModule, PersistenceService } from 'angular-persistence';
 import { LayoutTemplateModule } from './component/layout-template/layout-template.module';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 import { PixelStarshipsAPIInterceptorBackend } from './interceptor/api/pss-api.interceptor';
-import { ShipPreviewComponent } from './component/preview/ship-preview/ship-preview.component';
-import { RoomPreviewComponent } from './component/preview/room-preview/room-preview.component';
 
-import { FilterAllRouteComponent } from './component/route/filter-all-route/filter-all-route.component';
-import { FilterTop100RouteComponent } from './component/route/filter-top100-route/filter-top100-route.component';
-import { UserRouteComponent } from './component/route/user-route/user-route.component';
+import { SeerUserModule } from './component/route/user/user.module';
+import { SeerFilterAllModule } from './component/route/filter-all/filter-all.module';
+import { SeerFilterTop100Module } from './component/route/filter-top100/filter-top100.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ShipPreviewComponent,
-    RoomPreviewComponent,
-    FilterAllRouteComponent,
-    FilterTop100RouteComponent,
-    UserRouteComponent
+    AppComponent
   ],
   imports: [
     // Packages
@@ -37,7 +31,11 @@ import { UserRouteComponent } from './component/route/user-route/user-route.comp
     NgSpinKitModule,
     PersistenceModule,
     // Local
-    LayoutTemplateModule
+    AppRoutingModule,
+    LayoutTemplateModule,
+    SeerUserModule,
+    SeerFilterAllModule,
+    SeerFilterTop100Module
   ],
   providers: [
     { provide: XHRBackend, useClass: PixelStarshipsAPIInterceptorBackend },

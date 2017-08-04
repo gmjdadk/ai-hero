@@ -5,4 +5,24 @@
   <ship-preview *ngIf="ship" [ship]="ship"></ship-preview>
 </div>
 -->
-<seer-layout></seer-layout>
+<seer-layout>
+  <layout-header>
+    <ul class="left">
+      <li><a class="active" href="#">White Worf</a></li>
+    </ul>
+    <ul class="right">
+      <li><a [routerLink]="['/']">All</a></li>
+      <li><a [routerLink]="['/top100']">Top 100</a></li>
+    </ul>
+  </layout-header>
+
+  <layout-content>
+    <router-outlet></router-outlet>
+    <!--
+    <input type="text" [ngModel]="userSearch" (ngModelChange)="userSearchChanged($event)" />
+    <div class="wrap">
+      <sk-cube-grid *ngIf="!ship"></sk-cube-grid>
+      <ship-preview *ngIf="ship" [ship]="ship"></ship-preview>
+    </div>-->
+  </layout-content>
+</seer-layout>

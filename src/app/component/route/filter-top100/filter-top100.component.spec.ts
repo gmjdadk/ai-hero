@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserRouteComponent } from './user-route.component';
+import { FilterTop100Component } from './filter-top100.component';
 
-describe('UserRouteComponent', () => {
-  let component: UserRouteComponent;
-  let fixture: ComponentFixture<UserRouteComponent>;
+describe('FilterTop100Component', () => {
+  let component: FilterTop100Component;
+  let fixture: ComponentFixture<FilterTop100Component>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserRouteComponent ]
+      declarations: [ FilterTop100Component ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserRouteComponent);
+    fixture = TestBed.createComponent(FilterTop100Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

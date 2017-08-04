@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 const PX_PER_COLUMN = 25;
 const PX_PER_ROW = 25;
+const SCALE_FACTOR = 0.7;
 
 @Injectable()
 export class LayoutService {

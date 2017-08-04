@@ -11,7 +11,20 @@ input {
     text-align: center;
 }
 
-#wrap {
+.wrap {
+    width: 1024px;
     display: block;
     margin: 0 auto;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.right:after {
+    clear: both;
 }

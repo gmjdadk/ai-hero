@@ -1,19 +1,36 @@
+:host:before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-position: center top, center top;
+    background-size: 135%;
+    animation: background_subside 30s forwards, background_fadeout 5s forwards;
+    animation-timing-function: linear, linear;
+    background-image: linear-gradient(0deg, #000, rgba(0, 0, 0, 0.3) 100vh), url('/assets/background/iss052e019970_courtesy_nasa.jpg');
+    opacity: 0.5;
+    z-index: -10;
+}
+
 :host {
     display: block;
     min-height: 150vh;
-    background-position: center top, center top, center 100vh;
+    position: relative;
+    background-position: center 100vh;
     background-size: 100%;
-    animation: background_panin 2s, background_subside 30s 2s;
-    animation-timing-function: cubic-bezier(0, .4, 0, 1), linear;
-    background-image: linear-gradient(0deg, #000, rgba(0, 0, 0, 0.3) 100vh), url('/assets/background/iss052e019970_courtesy_nasa.jpg'), linear-gradient(0deg, #000, transparent 800px);
-}
-
-@keyframes background_panin {
-  from { background-size: 200%; }
-  to   { background-size: 135%; }
+    background: linear-gradient(0deg, #000, transparent 800px);
+    overflow: hidden;
+    z-index: 10;
 }
 
 @keyframes background_subside {
     from { background-size: 135% }
     to   { background-size: 100% }
+}
+
+@keyframes background_fadeout {
+    from { opacity: 1;  }
+    to   { opacity: 0.5 }
 }

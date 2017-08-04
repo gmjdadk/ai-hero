@@ -1,11 +1,11 @@
-import { Input, HostBinding, Component, OnInit } from '@angular/core';
+import { Input, ElementRef, HostBinding, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Room } from '../../../model/ship/room.model';
-import { Ship } from '../../../model/ship/ship.model';
+import { Room } from '../../../../../model/ship/room.model';
+import { Ship } from '../../../../../model/ship/ship.model';
 
-import { RoomByShipService } from '../../../service/ship/room/by-ship/room-by-ship.service';
-import { LayoutService } from '../../../service/preview/layout/layout.service';
+import { RoomByShipService } from '../../../../../service/ship/room/by-ship/room-by-ship.service';
+import { LayoutService } from '../../../../../service/preview/layout/layout.service';
 
 @Component({
   selector: 'ship-preview',
@@ -21,7 +21,8 @@ export class ShipPreviewComponent implements OnInit {
 
   constructor(
     private layoutService: LayoutService,
-    private roomByShipService: RoomByShipService
+    private roomByShipService: RoomByShipService,
+    private element: ElementRef
   ) { }
 
   @Input()
@@ -36,6 +37,16 @@ export class ShipPreviewComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  @HostBinding('style.transform')
+  get renderZoom(): string {
+    
+    //let rect = this.element.nativeElement.getBoundingClientRect();
+    let parentRect = this.element.nativeElement.parentElement.getBoundingClientRect();
+    let width = parseInt(this.layoutService.columnsToUnits(this.ship.Design.Columns).slice(0, -2));
+    let height = parseInt(this.layoutService.rowsToUnits(this.ship.Design.Rows).slice(0, -2));
+    return 'scale(' + Math.min(parentRect.width / width, 700 / height, 1).toString() + ')';
   }
 
   @HostBinding('style.width')

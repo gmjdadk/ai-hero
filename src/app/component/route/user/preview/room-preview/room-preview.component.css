@@ -4,13 +4,6 @@
     background-color: lightgray;
 }
 
-:host:hover {
-    cursor: pointer;
-    margin: -2px;
-    z-index: 100;
-    border: 2px solid yellow;
-}
-
 :host > .room-name {
     position: relative;
     display: block;
