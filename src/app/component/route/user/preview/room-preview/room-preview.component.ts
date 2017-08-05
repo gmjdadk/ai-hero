@@ -45,8 +45,8 @@ export class RoomPreviewComponent implements OnInit {
 
   @HostBinding('style.backgroundPosition')
   get renderBackgroundPosition(): string {
-    let xPart = this.room.Design.Sprite.X.toString() + 'px';
-    let yPart = this.room.Design.Sprite.Y.toString() + 'px';
+    let xPart = '-' + this.room.Design.Sprite.X.toString() + 'px';
+    let yPart = '-' + this.room.Design.Sprite.Y.toString() + 'px';
     return [xPart, yPart].join(' ');
   }
 }
