@@ -1,23 +1,26 @@
-#.travis.yml
-
 language: node_js
+
 node_js:
-  - "7.8"
+- '7.8'
 
 branches:
   only:
-    - master
+    - /.*/
     - /^greenkeeper/.*$/
 
 before_script:
-  - npm install -g firebase-tools
-  - npm install -g @angular/cli
+- npm install -g firebase-tools
+- npm install -g @angular/cli
 
 script:
-  - ng build --prod
+- ng build --prod
 
-after_success:
-  - firebase deploy --token $FIREBASE_TOKEN
+deploy:
+  provider: firebase
+  on:
+    branch: master
+  token:
+    secure: "nvJPoDbdnOAEh0VhSN9cXGE0NrP/fe6D8cmU1pCG77FlVXe1A0cCmY8puW5wURptHyK+bkCiP9E8S6T16NOaNCOnEG7U60TvNtiPQvqCVcdmpXUVCJhePHMoANqv3soXdv6nHH8Vszm0tUm92JgroF1s7UuB4JuxaPPWinU4AWWGMHD+fEFjx2okPVz3YSDnG8EbUoHxiuK78bUooQRHqciiBAxhkkXRPFJHcM3n/b9qDk7cIcd79fnoOO844F4TxozWs/85S806XZPFzGg+KT7VR8+cTNBOqqktxSt7s2VKNUWt70yFNWF+AcSLWkU1kNFm9AmWwBME600/puOzIerRql6b9+zPeIml54Rl6tdIAmYXjNh487X6tnCksVENBXfmzsMJvNBmOD1NTwqrSTM2xJeB5kjvT3ApMtHwaQ2UAFbyDeDeYZBoUylENN2GCHJpuCPl5e1RD2zjjZwlI76U/sm/5gWwK0u2rv0vUOML37x1BkGZff3cUxCJNVt+PvKSBjvrk8BhxuonpjRPAWrTRq/SPkOeHQyfYP0rsdIKSFrLaXhRwafba4YS+Yb9Vt4z5G90KrogOOT7Y/Tm4RkV2Ll3MqNoY4PSVRiVEnZoJaAPc8s5hjHRMe6+CE1porvhoSMF0vt5Gh9iN5xSM0DK+MjLqwSyua1F/bSv2wA="
 
 notifications:
   email:

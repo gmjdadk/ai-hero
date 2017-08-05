@@ -1,4 +1,5 @@
 # AiHero
+[![Build Status](https://travis-ci.org/kvanberendonck/ai-hero.svg?branch=master)](https://travis-ci.org/kvanberendonck/ai-hero)
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/kvanberendonck/ai-hero.svg)](https://greenkeeper.io/)
 

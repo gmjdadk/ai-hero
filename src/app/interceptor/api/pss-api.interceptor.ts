@@ -2,7 +2,7 @@ import { XHRBackend, Request, XHRConnection, Response } from '@angular/http';
 
 import { Observable } from 'rxjs';
 
-const API_BASE_URL: string = 'http://api.pixelstarships.com/';
+const API_BASE_URL: string = 'https://api.pixelstarships.com/';
 const API_USER_AGENT: string = 'Pixel%20Starships/56 CFNetwork/811.5.4 Darwin/16.6.0 (x86_64)';
   
 export class PixelStarshipsAPIInterceptorBackend extends XHRBackend {
