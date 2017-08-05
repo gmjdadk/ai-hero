@@ -16,8 +16,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  private user: User;
-  private ship: Ship;
+  public user: User;
+  public ship: Ship;
 
   constructor(
     private route: ActivatedRoute,

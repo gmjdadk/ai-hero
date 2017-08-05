@@ -17,7 +17,7 @@ import { LayoutService } from '../../../../../service/preview/layout/layout.serv
 })
 export class ShipPreviewComponent implements OnInit {
   private _ship: Ship;
-  private rooms: Room[];
+  public rooms: Room[]; // FIXME
 
   constructor(
     private layoutService: LayoutService,
