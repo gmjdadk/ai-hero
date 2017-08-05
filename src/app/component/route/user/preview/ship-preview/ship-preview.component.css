@@ -1,7 +1,7 @@
 :host {
     display: block;
     position: relative;
-    margin: 0 auto;
+    margin: 20px auto;
     transform-origin: 0;
     animation: ship_dropin .5s ease-in-out forwards;
 }
