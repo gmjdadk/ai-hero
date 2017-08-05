@@ -1,7 +1,7 @@
 # AiHero
-[![Build Status](https://travis-ci.org/kvanberendonck/ai-hero.svg?branch=master)](https://travis-ci.org/kvanberendonck/ai-hero)
+[![Build Status](https://travis-ci.org/kvanberendonck/ai-hero.svg?branch=master)](https://travis-ci.org/kvanberendonck/ai-hero) [![Greenkeeper badge](https://badges.greenkeeper.io/kvanberendonck/ai-hero.svg)](https://greenkeeper.io/)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/kvanberendonck/ai-hero.svg)](https://greenkeeper.io/)
+[Production Server](https://pssrank-28303.firebaseapp.com)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.4.
 
