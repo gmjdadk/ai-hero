@@ -25,7 +25,7 @@ export class FilterTop100Component implements OnInit {
     let tokenObs: Observable<string> = this.tokenByLamService.getTokenByLam();
 
     tokenObs
-      .flatMap(token => this.usersByRankingService.getUsersByRanking(token, 1, 20))
+      .flatMap(token => this.usersByRankingService.getUsersByRanking(token, 1, 100))
       .do(users => this.users = users)
       .subscribe();
   }
