@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./filter-top100.component.css']
 })
 export class FilterTop100Component implements OnInit {
-  private users: User[];
+  public users: User[];
 
   constructor(
     private tokenByLamService: TokenByLamService,

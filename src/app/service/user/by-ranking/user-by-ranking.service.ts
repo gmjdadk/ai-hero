@@ -32,6 +32,6 @@ export class UserByRankingService extends UserServiceBase {
       .map(res => xml.parse(res.text()))
       .map(res => res['ListUsersByRanking']['Users']['User'])
       .map(res => plainToClass(User, res as Object[]))
-      .catch(err => Observable.of({ exists: false }));
+      .catch(err => Observable.of(null));
   }
 }
