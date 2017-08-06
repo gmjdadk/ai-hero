@@ -15,6 +15,7 @@ import { ShipByUserService } from './service/ship/ship/by-user/ship-by-user.serv
 
 import { UserByIdentifierService } from './service/user/by-identifier/user-by-identifier.service';
 import { UserByNameService } from './service/user/by-name/user-by-name.service';
+import { UserByRankingService } from './service/user/by-ranking/user-by-ranking.service';
 
 import { Ship } from './model/ship/ship.model';
 
@@ -40,6 +41,7 @@ import { Subject, Observable } from 'rxjs';
     // User
     UserByIdentifierService,
     UserByNameService,
+    UserByRankingService
     // Device
     //LocalAdministeredMacService,
     // Token

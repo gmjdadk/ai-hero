@@ -1,3 +1,6 @@
-<p>
-  filter-top100 works!
-</p>
+<ul *ngIf="users">
+  <li *ngFor="let user of users">
+    <h1>#{{user.Ranking}} {{user.Name}} ({{user.Trophy}})</h1>
+    <a [routerLink]="['/user', user.Id]" routerLinkActive="active">View</a>
+  </li>
+</ul>
