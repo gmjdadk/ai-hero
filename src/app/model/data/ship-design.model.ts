@@ -49,4 +49,5 @@ export class ShipDesign {
 
   @Exclude() BackgroundSprite: StaticSprite;
   @Exclude() ForegroundSprite: StaticSprite;
+  @Exclude() SmallShipSprite: StaticSprite;
 }

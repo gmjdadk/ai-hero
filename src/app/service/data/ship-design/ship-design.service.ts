@@ -27,11 +27,13 @@ export class ShipDesignService {
   private annotateShipDesignWithSprites(ship: ShipDesign): Observable<ShipDesign> {
     return Observable.forkJoin([
         this.spriteService.getSpriteById(ship.InteriorSpriteId),
-        this.spriteService.getSpriteById(ship.ExteriorSpriteId)
+        this.spriteService.getSpriteById(ship.ExteriorSpriteId),
+        this.spriteService.getSpriteById(ship.MiniShipSpriteId)
       ]).map(res => {
-        let [interior, exterior] = res;
+        let [interior, exterior, small] = res;
         ship.BackgroundSprite = interior.exists? interior.sprite : null;
-        ship.ForegroundSprite = interior.exists? interior.sprite : null;
+        ship.ForegroundSprite = exterior.exists? exterior.sprite : null;
+        ship.SmallShipSprite = small.exists? small.sprite : null;
         return ship;
       });
   }

@@ -1,6 +1,7 @@
 <ul *ngIf="users">
-  <li *ngFor="let user of users">
-    <h1>#{{user.Ranking}} {{user.Name}} ({{user.Trophy}})</h1>
-    <a [routerLink]="['/user', user.Id]" routerLinkActive="active">View</a>
+  <li *ngFor="let each of users">
+    <small-ship-preview *ngIf="each.ship" [ship]="each.ship"></small-ship-preview>
+    <h1>#{{each.user.Ranking}} {{each.user.Name}} ({{each.user.Trophy}})</h1>
+    <a [routerLink]="['/user', each.user.Id]" routerLinkActive="active">View</a>
   </li>
 </ul>
