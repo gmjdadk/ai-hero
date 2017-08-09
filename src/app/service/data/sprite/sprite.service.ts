@@ -36,7 +36,7 @@ export class SpriteService {
     return this.sprites
       ? this.sprites
       : this.sprites = this.http
-        .get('x-cache:43200,pss:/FileService/ListSprites', {})
+        .get('x-cache:43200,[pss:/FileService/ListSprites]', {})
         .map(res => xml.parse(res.text()))
         .map(res => res['ListSprites']['Sprites']['Sprite'])
         .map(res => plainToClass(StaticSprite, res as Object[]))

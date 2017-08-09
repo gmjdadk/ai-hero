@@ -25,10 +25,10 @@ export class UserByRankingService extends UserServiceBase {
   // Note: The PSS API will send you 1-100 regardless of the range you specify.
   getUsersByRanking(token: string, start: number = 1, end: number = 100): Observable<User[]> {
     return this.http
-      .get('x-cache:600,pss:/LadderService/ListUsersByRanking' +
+      .get('x-cache:600,[pss:/LadderService/ListUsersByRanking' +
         '?from=' + encodeURIComponent(start.toString()) +
         '&to=' + encodeURIComponent(end.toString()) +
-        '&accessToken=' + encodeURIComponent(token))
+        '&accessToken=]' + encodeURIComponent(token))
       .map(res => xml.parse(res.text()))
       .map(res => res['ListUsersByRanking']['Users']['User'])
       .map(res => plainToClass(User, res as Object[]))

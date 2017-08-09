@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { PersistentHttpService } from '../../http/persistent/persistent-http.service';
 import { plainToClass } from 'class-transformer';
 
 import { User } from '../../../model/user/user.model';
@@ -14,14 +14,14 @@ import { Observable } from 'rxjs';
 export class UserByIdentifierService extends UserServiceBase {
 
   constructor(
-    protected http: Http
+    protected http: PersistentHttpService
   ) {
     super(http);
   }
 
   getUserByIdentifier(token: string, uid: number): Observable<{exists: boolean, user?: User}> {
     return this.http
-      .get('pss:/ShipService/InspectShip?userId=' + encodeURIComponent(uid.toString()) + '&accessToken=' + encodeURIComponent(token))
+      .get('x-cache:60,[pss:/ShipService/InspectShip?userId=' + encodeURIComponent(uid.toString()) + '&accessToken=]' + encodeURIComponent(token))
       .map(res => xml.parse(res.text()))
       .map(res => res['InspectShip'])
       .map(res => [ res['User'], res['Ship'] ])

@@ -36,7 +36,7 @@ export class RoomDesignService {
     return this.roomDesigns
       ? this.roomDesigns
       : this.roomDesigns = this.http
-        .get('x-cache:43200,pss:/RoomService/ListRoomDesigns2?languageKey=en', {})
+        .get('x-cache:43200,[pss:/RoomService/ListRoomDesigns2?languageKey=en]', {})
         .map(res => xml.parse(res.text()))
         .map(res => res['ListRoomDesigns']['RoomDesigns']['RoomDesign'])
         .map(res => plainToClass(RoomDesign, res as Object[]))

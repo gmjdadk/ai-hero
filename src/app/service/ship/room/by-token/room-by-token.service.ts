@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { PersistentHttpService } from '../../../http/persistent/persistent-http.service';
 import { plainToClass } from 'class-transformer';
 
 import { RoomDesignService } from '../../../data/room-design/room-design.service';
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 export class RoomByTokenService extends RoomServiceBase {
 
   constructor(
-    http: Http,
+    http: PersistentHttpService,
     roomDesignService: RoomDesignService
   ) {
     super(http, roomDesignService);
@@ -23,7 +23,7 @@ export class RoomByTokenService extends RoomServiceBase {
 
   getRoomsByToken(token: string): Observable<Room[]> {
     return this.http
-      .get('pss:/RoomService/ListRoomsViaAccessToken?accessToken=' + encodeURIComponent(token))
+      .get('x-cache:15,[pss:/RoomService/ListRoomsViaAccessToken?accessToken=]' + encodeURIComponent(token))
       .map(res => xml.parse(res.text()))
       .map(res => res['ListRoomsViaAccessToken']['Rooms']['Room'])
       .map(res => plainToClass(Room, res as Object[]))

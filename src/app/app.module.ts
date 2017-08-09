@@ -19,6 +19,7 @@ import { SeerFilterTop100Module } from './component/route/filter-top100/filter-t
 
 import { TokenByLamService } from './service/token/by-lam/token-by-lam.service';
 import { LocalAdministeredMacService } from './service/device/mac/lam.service';
+import { PersistentHttpService } from './service/http/persistent/persistent-http.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { LocalAdministeredMacService } from './service/device/mac/lam.service';
     { provide: XHRBackend, useClass: PixelStarshipsAPIInterceptorBackend },
     PersistenceService,
     TokenByLamService,
+    PersistentHttpService,
     LocalAdministeredMacService
   ],
   bootstrap: [ AppComponent ]

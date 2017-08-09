@@ -7,9 +7,10 @@
     bottom: 0;
     background-position: center top, center top;
     background-size: 135%;
-    animation: background_subside 30s forwards, background_fadeout 5s forwards;
-    animation-timing-function: linear, linear;
+    //animation: background_subside 30s forwards, background_fadeout 5s forwards;
+    //animation-timing-function: linear, linear;
     background-image: linear-gradient(0deg, #000, rgba(0, 0, 0, 0.3) 100vh), url('/assets/background/iss052e019970_courtesy_nasa.jpg');
+    background-repeat: no-repeat;
     opacity: 0.5;
     z-index: -10;
 }
@@ -25,6 +26,7 @@
     z-index: 10;
 }
 
+/*
 @keyframes background_subside {
     from { background-size: 135% }
     to   { background-size: 100% }
@@ -34,3 +36,4 @@
     from { opacity: 1;  }
     to   { opacity: 0.5 }
 }
+*/

@@ -42,7 +42,7 @@ export class ShipDesignService {
     return this.shipDesigns
       ? this.shipDesigns
       : this.shipDesigns = this.http
-        .get('x-cache:43200,pss:/ShipService/ListAllShipDesigns2?languageKey=en', {})
+        .get('x-cache:43200,[pss:/ShipService/ListAllShipDesigns2?languageKey=en]', {})
         .map(res => xml.parse(res.text()))
         .map(res => res['ListShipDesigns']['ShipDesigns']['ShipDesign'])
         .map(res => plainToClass(ShipDesign, res as Object[]))
