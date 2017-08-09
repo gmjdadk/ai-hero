@@ -33,7 +33,8 @@ export class FilterTop100Component implements OnInit {
       .map(users => this.users = users.map(x => ({user: x, ship: null}) ))
       .do(users => {
         Observable.from(users.map((x, i) => ({unwrap: x, index: i}) ))
-          .concatMap(i => Observable.of(i).delay(1000))
+          .concatMap(i => Observable.of(i).delay(Math.min(50 + i.index * 25, 1000)))
+          .do(s => console.log('fetching', s.index))
           .combineLatest(tokenObs)
           .flatMap(res => {
             let [val, token] = res;
