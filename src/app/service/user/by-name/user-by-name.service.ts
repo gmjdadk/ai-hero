@@ -3,6 +3,7 @@ import { PersistentHttpService } from '../../http/persistent/persistent-http.ser
 import { plainToClass } from 'class-transformer';
 
 import { UserBrief } from '../../../model/user/user-brief.model';
+import { User } from '../../../model/user/user.model';
 import { Ship } from '../../../model/ship/ship.model';
 import { UserServiceBase } from '../base/user.service';
 import { UserByIdentifierService } from '../by-identifier/user-by-identifier.service';
@@ -22,7 +23,7 @@ export class UserByNameService extends UserServiceBase {
   }
 
   // FIXME: This only returns a user snapshot, not a full user
-  getUserByName(token: string, name: string): Observable<{exists: boolean, user?: UserBrief}> {
+  getUserByName(token: string, name: string): Observable<{exists: boolean, user?: User}> {
     return this.getAllUsersMatching(token, name)
       .map(res => res[0].Id)
       .flatMap(uid => this.userByIdentifierService.getUserByIdentifier(token, uid))
