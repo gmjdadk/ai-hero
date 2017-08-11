@@ -34,7 +34,6 @@ export class FilterTop100Component implements OnInit {
       .do(users => {
         Observable.from(users.map((x, i) => ({unwrap: x, index: i}) ))
           .concatMap(i => Observable.of(i).delay(Math.min(50 + i.index * 25, 1000)))
-          .do(s => console.log('fetching', s.index))
           .combineLatest(tokenObs)
           .flatMap(res => {
             let [val, token] = res;
@@ -43,11 +42,6 @@ export class FilterTop100Component implements OnInit {
               .map(ship => ({index: val.index, ship: ship}));
           })
           .do(res => this.users[res.index].ship = res.ship)
-          /*
-          .flatMap(res => ({ res[0], ... { val: this.userByIdentifierService.getUserByIdentifier(res[1], res[0].val.user) }}))
-          .switchMap(user => user.exists? this.shipByUserService.getShipByUser(user.user) : null)
-          .reduce((_, u, i) => users[i].ship = u)
-          */
           .subscribe();
       })
       .subscribe();

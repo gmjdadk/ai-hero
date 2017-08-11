@@ -21,14 +21,20 @@ export class UserByNameService extends UserServiceBase {
     super(http);
   }
 
+  // FIXME: This only returns a user snapshot, not a full user
   getUserByName(token: string, name: string): Observable<{exists: boolean, user?: User}> {
-    return this.http
-      .get('x-cache:60,[pss:/UserService/SearchUsers?searchString=' + encodeURIComponent(name) + ']')
-      .map(res => xml.parse(res.text()))
-      .map(res => res['SearchUsers']['Users']['User'])
-      .map(res => (Array.isArray(res)? res : [res]).filter(u => u['Name'] === name))
-      .map(res => parseInt(res[0]['Id']))
+    return this.getAllUsersMatching(token, name)
+      .map(res => res[0].Id)
       .flatMap(uid => this.userByIdentifierService.getUserByIdentifier(token, uid))
       .catch(err => Observable.of({ exists: false }));
+  }
+
+  // FIXME: This only returns a user snapshot, not a full user
+  getAllUsersMatching(token: string, name: string): Observable<User[]> {
+    return this.http
+      .get('x-cache:180,[pss:/UserService/SearchUsers?searchString=' + encodeURIComponent(name) + ']')
+      .map(res => xml.parse(res.text()))
+      .map(res => res['SearchUsers']['Users']['User'])
+      .map(res => Array.isArray(res)? res : [res]);
   }
 }
