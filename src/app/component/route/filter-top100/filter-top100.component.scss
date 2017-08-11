@@ -1,5 +1,7 @@
 :host ul {
     list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 :host li {
@@ -10,6 +12,7 @@
     & a {
         display: block;
         padding: .5rem 1.5rem;
+        margin: 0 -1.5rem;
         width: 100%;
         height: 5rem;
         background: rgba(0, 0, 0, .4);
