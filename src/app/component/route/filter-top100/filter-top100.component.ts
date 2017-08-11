@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-filter-top100',
   templateUrl: './filter-top100.component.html',
-  styleUrls: ['./filter-top100.component.css']
+  styleUrls: ['./filter-top100.component.scss']
 })
 export class FilterTop100Component implements OnInit {
   public users: {user: User, ship: Ship}[];
