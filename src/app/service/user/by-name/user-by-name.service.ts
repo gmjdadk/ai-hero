@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { PersistentHttpService } from '../../http/persistent/persistent-http.service';
 import { plainToClass } from 'class-transformer';
 
-import { User } from '../../../model/user/user.model';
+import { UserBrief } from '../../../model/user/user-brief.model';
 import { Ship } from '../../../model/ship/ship.model';
 import { UserServiceBase } from '../base/user.service';
 import { UserByIdentifierService } from '../by-identifier/user-by-identifier.service';
@@ -22,7 +22,7 @@ export class UserByNameService extends UserServiceBase {
   }
 
   // FIXME: This only returns a user snapshot, not a full user
-  getUserByName(token: string, name: string): Observable<{exists: boolean, user?: User}> {
+  getUserByName(token: string, name: string): Observable<{exists: boolean, user?: UserBrief}> {
     return this.getAllUsersMatching(token, name)
       .map(res => res[0].Id)
       .flatMap(uid => this.userByIdentifierService.getUserByIdentifier(token, uid))
@@ -30,7 +30,7 @@ export class UserByNameService extends UserServiceBase {
   }
 
   // FIXME: This only returns a user snapshot, not a full user
-  getAllUsersMatching(token: string, name: string): Observable<User[]> {
+  getAllUsersMatching(token: string, name: string): Observable<UserBrief[]> {
     return this.http
       .get('x-cache:180,[pss:/UserService/SearchUsers?searchString=' + encodeURIComponent(name) + ']')
       .map(res => xml.parse(res.text()))

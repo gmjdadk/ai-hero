@@ -18,7 +18,7 @@ import { Subject, Observable } from 'rxjs';
 export class FilterAllComponent implements OnInit {
   public users: {user: User, ship: Ship}[];
 
-  private userSearch: string;
+  public userSearch: string;
   private userSearchSubject: Subject<string> = new Subject<string>();
 
   constructor(
@@ -38,6 +38,7 @@ export class FilterAllComponent implements OnInit {
       .do(() => this.users = null)
       .combineLatest(tokenObs, (uname, token) => { return { uname: uname, token: token } })
       .flatMap(res => this.usersByNameService.getAllUsersMatching(res.token, res.uname))
+      .do(res => console.log(res))
       .map(users => this.users = users.map(x => ({user: x, ship: null}) ))
       .do(users => {
         // FIXME: need to unsubscribe from all of these when the search changes
