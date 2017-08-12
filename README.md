@@ -1,5 +1,5 @@
 # AiHero
-[![Build Status](https://travis-ci.org/kvanberendonck/ai-hero.svg?branch=master)](https://travis-ci.org/kvanberendonck/ai-hero) [![Greenkeeper badge](https://badges.greenkeeper.io/kvanberendonck/ai-hero.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/kvanberendonck/ai-hero.svg?branch=master)](https://travis-ci.org/kvanberendonck/ai-hero) [![David](https://img.shields.io/david/kvanberendonck/ai-hero.svg)]() [![Greenkeeper badge](https://badges.greenkeeper.io/kvanberendonck/ai-hero.svg)](https://greenkeeper.io/)
 
 [Production Server](https://pssrank-28303.firebaseapp.com)
 
