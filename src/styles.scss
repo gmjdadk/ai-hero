@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Libs */
+@import "./normalize.css";
+
+/* Asset styles */
+@import "./assets/font/all-fonts.scss";
+
+html, body {
+    background-color: #0a121d;
+}
+
+body {
+    font-family: sans-serif;
+    color: #ddd;
+    line-height: 20px;
+    font-size: 14px;
+    image-rendering: optimizespeed;
+}
+
+h1, h2, h3, h4, h5 {
+    display: inline-block;
+    font-family: 'ArcaMajora3-Heavy', sans-serif;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font-size: 18px;
+    padding: 12px;
+    border: 1px solid #C1C6CC
+}

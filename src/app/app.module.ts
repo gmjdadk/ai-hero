@@ -21,9 +21,13 @@ import { TokenByLamService } from './service/token/by-lam/token-by-lam.service';
 import { LocalAdministeredMacService } from './service/device/mac/lam.service';
 import { PersistentHttpService } from './service/http/persistent/persistent-http.service';
 
+import { PSSRModelsModule, CharacterDesign } from './model/model.module';
+import { NotFoundComponent } from './route/src/app/route/not-found/not-found.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundComponent
   ],
   imports: [
     // Packages
@@ -32,19 +36,17 @@ import { PersistentHttpService } from './service/http/persistent/persistent-http
     FormsModule,
     HttpModule,
     PersistenceModule,
-    // Local
+    // PSSR Modules
     AppRoutingModule,
     LayoutTemplateModule,
     SeerUserModule,
     SeerFilterAllModule,
-    SeerFilterTop100Module
+    SeerFilterTop100Module,
+    PSSRModelsModule
   ],
   providers: [
     { provide: XHRBackend, useClass: PixelStarshipsAPIInterceptorBackend },
-    PersistenceService,
-    TokenByLamService,
-    PersistentHttpService,
-    LocalAdministeredMacService
+    PersistenceService
   ],
   bootstrap: [ AppComponent ]
 })

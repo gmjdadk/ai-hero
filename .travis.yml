@@ -3,9 +3,16 @@ language: node_js
 node_js:
 - '7.8'
 
+addons:
+  sauce_connect:
+    username: "pssrank"
+  jwt:
+    secure: "J2gMQtV+KyzvXTLThju/cYhtXq+2n4UBVrUJJpuuEH6ImI5jQqae5SAPMimRZnU1zHeuXQE7wn76qLVGtph9A2w3UKNaBhB11V5KgljxQL0QpIA1kxwcy/uDNMI6P55UFUEkP3z8ftrHpCj+FZOvFDLlfbNZ07Dh2ipsTsH27ZLI0Z1QDxrSVetJ48aGIf2Hg2bm844scmuLqSkzphPBhz74u9ximB+V3lc6vLMaKI0Csw4IwPZ6DHPk0LZmqdh16x9SQI9V0frfaEyyoNLBYqdk2kLEcsTVr/NxKh8Zte6Olag/fK0L5Jou+66e/CDBcChKhQtMJA/ZmoEda6CV+cSddqZrRbIW35I45KmtHnG6SgNXA/TL5ISfFtZyRstmOIct7yOwlvR5si+P1tA9RHU+hNjiwWkUAIjWXrcZo3A4lu921hE+YGd4R5cFs/bU1VXKqXT+tzJipJsmF7KikfhgsBaraW0cmjq4J1E3V/dLPwZ4AJmKfXxSMgmCjddQYxzI645IpkkpjDVeZDzR57IMQqfVEgPT8fA6V2gR61+yxhu2t+NqLeg82uTOnpSzsj+/0W/LldFCpdTC4RUvd41O/JEbzO1DXKFc73jr3GH+rYgs/C0AGkr0xxt+7jADeysGJSRMoUAGA26fVxvL/dtyag5/wGLEFh0Ougket58="
+
 branches:
   only:
     - /.*/
+    # explicitly always build greenkeeper-related branches
     - /^greenkeeper/.*$/
 
 before_script:
@@ -15,14 +22,26 @@ before_script:
 
 script:
 - ng build --prod
+- ng test --single-run
+- ng e2e
 
 deploy:
-  provider: firebase
-  skip_cleanup: true
-  on:
-    branch: master
-  token:
-    secure: "nvJPoDbdnOAEh0VhSN9cXGE0NrP/fe6D8cmU1pCG77FlVXe1A0cCmY8puW5wURptHyK+bkCiP9E8S6T16NOaNCOnEG7U60TvNtiPQvqCVcdmpXUVCJhePHMoANqv3soXdv6nHH8Vszm0tUm92JgroF1s7UuB4JuxaPPWinU4AWWGMHD+fEFjx2okPVz3YSDnG8EbUoHxiuK78bUooQRHqciiBAxhkkXRPFJHcM3n/b9qDk7cIcd79fnoOO844F4TxozWs/85S806XZPFzGg+KT7VR8+cTNBOqqktxSt7s2VKNUWt70yFNWF+AcSLWkU1kNFm9AmWwBME600/puOzIerRql6b9+zPeIml54Rl6tdIAmYXjNh487X6tnCksVENBXfmzsMJvNBmOD1NTwqrSTM2xJeB5kjvT3ApMtHwaQ2UAFbyDeDeYZBoUylENN2GCHJpuCPl5e1RD2zjjZwlI76U/sm/5gWwK0u2rv0vUOML37x1BkGZff3cUxCJNVt+PvKSBjvrk8BhxuonpjRPAWrTRq/SPkOeHQyfYP0rsdIKSFrLaXhRwafba4YS+Yb9Vt4z5G90KrogOOT7Y/Tm4RkV2Ll3MqNoY4PSVRiVEnZoJaAPc8s5hjHRMe6+CE1porvhoSMF0vt5Gh9iN5xSM0DK+MjLqwSyua1F/bSv2wA="
+  # default environment: deploys on every push to master
+  - provider: firebase
+    skip_cleanup: true
+    project: "default"
+    on:
+      branch: master
+    token:
+      secure: "nvJPoDbdnOAEh0VhSN9cXGE0NrP/fe6D8cmU1pCG77FlVXe1A0cCmY8puW5wURptHyK+bkCiP9E8S6T16NOaNCOnEG7U60TvNtiPQvqCVcdmpXUVCJhePHMoANqv3soXdv6nHH8Vszm0tUm92JgroF1s7UuB4JuxaPPWinU4AWWGMHD+fEFjx2okPVz3YSDnG8EbUoHxiuK78bUooQRHqciiBAxhkkXRPFJHcM3n/b9qDk7cIcd79fnoOO844F4TxozWs/85S806XZPFzGg+KT7VR8+cTNBOqqktxSt7s2VKNUWt70yFNWF+AcSLWkU1kNFm9AmWwBME600/puOzIerRql6b9+zPeIml54Rl6tdIAmYXjNh487X6tnCksVENBXfmzsMJvNBmOD1NTwqrSTM2xJeB5kjvT3ApMtHwaQ2UAFbyDeDeYZBoUylENN2GCHJpuCPl5e1RD2zjjZwlI76U/sm/5gWwK0u2rv0vUOML37x1BkGZff3cUxCJNVt+PvKSBjvrk8BhxuonpjRPAWrTRq/SPkOeHQyfYP0rsdIKSFrLaXhRwafba4YS+Yb9Vt4z5G90KrogOOT7Y/Tm4RkV2Ll3MqNoY4PSVRiVEnZoJaAPc8s5hjHRMe6+CE1porvhoSMF0vt5Gh9iN5xSM0DK+MjLqwSyua1F/bSv2wA="
+  # production environment: deployed manually by rebasing production branch and pushing
+  - provider: firebase
+    skip_cleanup: true
+    project: "production"
+    on:
+      branch: production
+    token:
+      secure: "nvJPoDbdnOAEh0VhSN9cXGE0NrP/fe6D8cmU1pCG77FlVXe1A0cCmY8puW5wURptHyK+bkCiP9E8S6T16NOaNCOnEG7U60TvNtiPQvqCVcdmpXUVCJhePHMoANqv3soXdv6nHH8Vszm0tUm92JgroF1s7UuB4JuxaPPWinU4AWWGMHD+fEFjx2okPVz3YSDnG8EbUoHxiuK78bUooQRHqciiBAxhkkXRPFJHcM3n/b9qDk7cIcd79fnoOO844F4TxozWs/85S806XZPFzGg+KT7VR8+cTNBOqqktxSt7s2VKNUWt70yFNWF+AcSLWkU1kNFm9AmWwBME600/puOzIerRql6b9+zPeIml54Rl6tdIAmYXjNh487X6tnCksVENBXfmzsMJvNBmOD1NTwqrSTM2xJeB5kjvT3ApMtHwaQ2UAFbyDeDeYZBoUylENN2GCHJpuCPl5e1RD2zjjZwlI76U/sm/5gWwK0u2rv0vUOML37x1BkGZff3cUxCJNVt+PvKSBjvrk8BhxuonpjRPAWrTRq/SPkOeHQyfYP0rsdIKSFrLaXhRwafba4YS+Yb9Vt4z5G90KrogOOT7Y/Tm4RkV2Ll3MqNoY4PSVRiVEnZoJaAPc8s5hjHRMe6+CE1porvhoSMF0vt5Gh9iN5xSM0DK+MjLqwSyua1F/bSv2wA="
 
 notifications:
   email:

@@ -22,7 +22,7 @@ export class UserByRankingService extends UserServiceBase {
   }
 
   // Returns users in ascending order - first is highest ranked
-  // Note: The PSS API will send you 1-100 regardless of the range you specify.
+  // Note: The PSS API has a bug and will send you 1-100 regardless of the range you specify.
   getUsersByRanking(token: string, start: number = 1, end: number = 100): Observable<User[]> {
     return this.http
       .get('x-cache:600,[pss:/LadderService/ListUsersByRanking' +

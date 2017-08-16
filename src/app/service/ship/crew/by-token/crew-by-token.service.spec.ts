@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { CrewByTokenService } from './crew-by-token.provider';
+import { CrewByTokenService } from './crew-by-token.service';
 
 describe('CrewByTokenService', () => {
   beforeEach(() => {

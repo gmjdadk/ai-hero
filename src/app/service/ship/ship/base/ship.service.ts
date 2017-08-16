@@ -8,7 +8,6 @@ import * as xml from 'pixl-xml';
 import 'rxjs';
 import { Observable } from 'rxjs';
 
-@Injectable()
 export abstract class ShipServiceBase {
 
   constructor(

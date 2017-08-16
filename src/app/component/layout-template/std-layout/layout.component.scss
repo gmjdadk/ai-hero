@@ -10,7 +10,7 @@
     //animation: background_subside 30s forwards, background_fadeout 5s forwards;
     //animation-timing-function: linear, linear;
     background-image: linear-gradient(0deg, #000, rgba(0, 0, 0, 0.3) 100vh), url('/assets/background/iss052e019970_courtesy_nasa.jpg');
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; 
     opacity: 0.5;
     z-index: -10;
 }

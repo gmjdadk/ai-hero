@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { RoomService } from './room.service';
+import { RoomServiceBase } from './room.service';
 
-describe('RoomService', () => {
+describe('RoomServiceBase', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [RoomService]
+      providers: [RoomServiceBase]
     });
   });
 
-  it('should be created', inject([RoomService], (service: RoomService) => {
+  it('should be created', inject([RoomServiceBase], (service: RoomServiceBase) => {
     expect(service).toBeTruthy();
   }));
 });

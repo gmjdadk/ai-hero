@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "pssrank-28303"
+    "default": "pssrank-28303",
+    "production": "pssrank-8a0c3"
   }
 }

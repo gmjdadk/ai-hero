@@ -3,11 +3,11 @@ import { Http } from '@angular/http';
 
 import * as md5 from 'md5';
 
-@Injectable()
 export abstract class TokenServiceBase {
-  static DEVICE_TYPE = "DeviceTypeMac";
-  static MD5_CHECKSUM_SALT = "savysoda";
-  static WAIVE_ADVERTISING_KEY = "\"\"";
+  /* These will probably be common among child providers */
+  protected static DEVICE_TYPE = "DeviceTypeMac";
+  protected static MD5_CHECKSUM_SALT = "savysoda";
+  protected static WAIVE_ADVERTISING_KEY = "\"\"";
 
   constructor(
     protected http: Http

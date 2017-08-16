@@ -12,7 +12,7 @@ import 'rxjs';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export abstract class CrewByShipService extends CrewServiceBase {
+export class CrewByShipService extends CrewServiceBase {
 
   constructor(
     http: Http,
@@ -21,5 +21,5 @@ export abstract class CrewByShipService extends CrewServiceBase {
     super(http, characterDesignService);
   }
 
-  //
+  // TODO
 }

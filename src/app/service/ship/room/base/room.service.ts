@@ -16,7 +16,6 @@ const VERTICAL_PASSABLE_ROOMS = ["Lift"];
 // Rooms with these status should be ignored
 const ROOM_STATUS_IGNORE = ["Inventory"];
 
-@Injectable()
 export abstract class RoomServiceBase {
 
   constructor(
