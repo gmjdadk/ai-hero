@@ -19,7 +19,7 @@
     "@angular/forms": "^4.0.0",
     "@angular/http": "^4.0.0",
     "@angular/platform-browser": "^4.0.0",
-    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/platform-browser-dynamic": "4.3.4",
     "@angular/router": "^4.0.0",
     "angular-persistence": "^1.0.1",
     "class-transformer": "^0.1.7",
