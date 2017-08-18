@@ -1,11 +1,8 @@
 # AiHero
 [![Build Status](https://travis-ci.org/kvanberendonck/ai-hero.svg?branch=master)](https://travis-ci.org/kvanberendonck/ai-hero) [![David](https://img.shields.io/david/kvanberendonck/ai-hero.svg)]() [![Greenkeeper badge](https://badges.greenkeeper.io/kvanberendonck/ai-hero.svg)](https://greenkeeper.io/)
 
-[Production Server](https://pssrank-28303.firebaseapp.com)
-
-linear-gradient(rgba(255, 225, 0, 0.35), rgba(0,0,0,.3) 40%)
-linear-gradient(rgba(192, 185, 172, 0.35), rgba(0,0,0,.3) 40%)
-linear-gradient(rgba(221, 173, 77, 0.35), rgba(0,0,0,.3) 40%)
+[Production Server](https://pssrank-8a0c3.firebaseapp.com)
+[Development Server](https://pssrank-28303.firebaseapp.com)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.4.
 
