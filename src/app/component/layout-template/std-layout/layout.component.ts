@@ -5,7 +5,7 @@ export * from './content/content.component';
 export * from './footer/footer.component';
 
 @Component({
-  selector: 'seer-layout',
+  selector: 'pssr-std-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })

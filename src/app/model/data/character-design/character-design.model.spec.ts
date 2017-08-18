@@ -9,7 +9,6 @@ describe('CharacterDesign', () => {
   });
 
   it('can be constructed', () => {
-    let x = new CharacterDesign();
-    expect(x).toBeTruthy();
+    expect(new CharacterDesign()).toBeTruthy();
   });
 });

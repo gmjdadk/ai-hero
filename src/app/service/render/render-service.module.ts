@@ -7,8 +7,6 @@ export { GridServiceBase, GridToPxService };
 
 @NgModule({
   declarations: [
-    GridServiceBase,
-    GridToPxService,
     RowsToPxPipe,
     ColumnsToPxPipe
   ],

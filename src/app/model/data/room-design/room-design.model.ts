@@ -1,5 +1,5 @@
 import { Type, Exclude } from 'class-transformer';
-import { StaticSprite } from './static-sprite.model';
+import { StaticSprite } from '../static-sprite/static-sprite.model';
 
 export class RoomDesign {
   @Type(() => Number) Capacity: number;

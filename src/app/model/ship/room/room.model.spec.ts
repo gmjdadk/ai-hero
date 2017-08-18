@@ -9,7 +9,6 @@ describe('Room', () => {
   });
 
   it('can be constructed', () => {
-    let x = new Room();
-    expect(x).toBeTruthy();
+    expect(new Room()).toBeTruthy();
   });
 });

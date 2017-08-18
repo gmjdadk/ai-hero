@@ -1,5 +1,5 @@
 import { Type, Exclude } from 'class-transformer';
-import { ShipDesign } from '../data/ship-design.model';
+import { ShipDesign } from '../../data/ship-design/ship-design.model';
 
 export class Ship {
   @Type(() => Number) BrightnessValue: number;

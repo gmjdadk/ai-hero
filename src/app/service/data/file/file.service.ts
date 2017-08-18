@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import { PersistentHttpService } from '../../http/persistent/persistent-http.service';
-import { Type, plainToClass } from 'class-transformer';
+import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs/Observable';
 
-import * as xml from 'pixl-xml';
-import 'rxjs';
-import { Observable } from 'rxjs';
-
-import { StaticFile } from '../../../model/data/static-file.model';
+import { StaticFile } from '../../../model/model.module';
+import { PersistentHttpService, XMLSerializerService } from '../../http/http-service.module';
 
 @Injectable()
 export class FileService {
@@ -14,7 +11,10 @@ export class FileService {
   private files: Observable<StaticFile[]>;
   private filesMap: Observable<Map<number, StaticFile>>;
 
-  constructor(private http: PersistentHttpService) { }
+  constructor(
+    private http: PersistentHttpService,
+    private xmlSerializerService: XMLSerializerService
+  ) { }
 
   preloadCommons(): Observable<{}> {
     return this.getFilesMap().flatMap(_ => Observable.empty());
@@ -25,7 +25,7 @@ export class FileService {
       ? this.files
       : this.files = this.http
         .get('x-cache:43200,[pss:/FileService/ListFiles2?deviceType=DeviceTypeiPhone]', {})
-        .map(res => xml.parse(res.text()))
+        .map(res => this.xmlSerializerService.unserialise(res.text()))
         .map(res => res['ListFiles']['Files']['File'])
         .map(res => plainToClass(StaticFile, res as Object[]))
         .publishReplay(1)
@@ -44,6 +44,6 @@ export class FileService {
   getFileById(id: number): Observable<{ exists: boolean, file?: StaticFile }> {
     return this.getFilesMap()
       .map(res => res.get(id))
-      .map(res => { return { exists: res !== undefined, file: res } });
+      .map(res => ({ exists: res !== undefined, file: res }));
   }
 }

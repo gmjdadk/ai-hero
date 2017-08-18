@@ -10,12 +10,11 @@ describe('User', () => {
   });
 
   it('can be constructed', () => {
-    let x = new User();
-    expect(x).toBeTruthy();
+    expect(new User()).toBeTruthy();
   });
 
   it('may be used in place of a UserBrief', () => {
-    let x = new User();
+    const x = new User();
     expect(x instanceof UserBrief).toBeTruthy();
-  })
+  });
 });

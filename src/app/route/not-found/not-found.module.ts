@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotFoundRouteComponent } from './not-found.component';
-import { NotFoundRoutingModule } from './not-found-routing.module';
+import { PSSRPageNotFoundRoutingModule } from './not-found-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    NotFoundRoutingModule
+    PSSRPageNotFoundRoutingModule
   ],
   declarations: [
     NotFoundRouteComponent
@@ -15,4 +15,4 @@ import { NotFoundRoutingModule } from './not-found-routing.module';
     NotFoundRouteComponent
   ]
 })
-export class SeerUserModule { }
+export class PSSRPageNotFoundModule { }

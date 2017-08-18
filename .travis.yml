@@ -22,8 +22,9 @@ before_script:
 
 script:
 - ng build --prod
-- ng test --single-run
-- ng e2e
+- ng lint
+#- ng test --single-run
+#- ng e2e
 
 deploy:
   # default environment: deploys on every push to master

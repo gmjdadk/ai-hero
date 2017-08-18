@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { FilterAllComponent } from './filter-all.component';
+import { SearchAllRouteComponent } from './search-all.component';
 
-describe('FilterAllComponent', () => {
-  let component: FilterAllComponent;
-  let fixture: ComponentFixture<FilterAllComponent>;
+describe('SearchAllRouteComponent', () => {
+  let component: SearchAllRouteComponent;
+  let fixture: ComponentFixture<SearchAllRouteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FilterAllComponent ],
+      declarations: [ SearchAllRouteComponent ],
       imports: [ RouterTestingModule ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FilterAllComponent);
+    fixture = TestBed.createComponent(SearchAllRouteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

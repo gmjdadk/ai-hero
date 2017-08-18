@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FilterAllComponent } from './filter-all.component';
+import { SearchAllRouteComponent } from './search-all.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: '', redirectTo: '/all', pathMatch: 'full' },
-      { path: 'all', component: FilterAllComponent }
+      { path: 'all', component: SearchAllRouteComponent }
     ])
   ],
   exports: [RouterModule]
 })
-export class FilterAllRoutingModule { }
+export class PSSRSearchAllRoutingModule { }

@@ -9,7 +9,6 @@ describe('StaticSprite', () => {
   });
 
   it('can be constructed', () => {
-    let x = new StaticSprite();
-    expect(x).toBeTruthy();
+    expect(new StaticSprite()).toBeTruthy();
   });
 });

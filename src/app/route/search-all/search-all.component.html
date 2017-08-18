@@ -1,7 +1,7 @@
 <input type="text" [ngModel]="userSearch" (ngModelChange)="userSearchChanged($event)" />
 <ul *ngIf="users">
   <li *ngFor="let each of users">
-    <small-ship-preview *ngIf="each.ship" [ship]="each.ship"></small-ship-preview>
+    <pssr-render-small-ship *ngIf="each.ship" [ship]="each.ship"></pssr-render-small-ship>
     <h1>#{{each.user.Ranking}} {{each.user.Name}} ({{each.user.Trophy}})</h1>
     <a [routerLink]="['/user', each.user.Id]" routerLinkActive="active">View</a>
   </li>

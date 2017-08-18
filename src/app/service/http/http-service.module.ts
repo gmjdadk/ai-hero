@@ -6,10 +6,6 @@ import { XMLSerializerService } from './xml/xml-serializer.service';
 export { PersistentHttpService, XMLSerializerService };
 
 @NgModule({
-  declarations: [
-    PersistentHttpService,
-    XMLSerializerService
-  ],
   providers: [
     PersistentHttpService,
     XMLSerializerService

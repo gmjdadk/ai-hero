@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs/Observable';
 
-import { RoomDesignService } from '../../../data/room-design/room-design.service';
-import { Ship } from '../../../../model/ship/ship.model';
-import { Room } from '../../../../model/ship/room.model';
-
+import { Ship, Room } from '../../../../model/model.module';
 import { RoomServiceBase } from '../base/room.service';
-
-import * as xml from 'pixl-xml';
-import 'rxjs';
-import { Observable } from 'rxjs';
+import { RoomDesignService } from '../../../data/room-design/room-design.service';
 
 @Injectable()
 export class RoomByShipService extends RoomServiceBase {

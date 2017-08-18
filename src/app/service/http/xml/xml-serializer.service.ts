@@ -17,7 +17,7 @@ export class XMLSerializerService {
 
   serialize(object: any): string {
     // FIXME: serialize not implemented
-    throw Error("not implemented");
+    throw Error('not implemented');
   }
 
 }

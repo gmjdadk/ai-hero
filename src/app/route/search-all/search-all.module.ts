@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SeerCommonComponentsModule } from '../common/common.module';
-import { FilterAllComponent } from './filter-all.component';
-import { FilterAllRoutingModule } from './filter-all-routing.module';
+import { SearchAllRouteComponent } from './search-all.component';
+import { PSSRSearchAllRoutingModule } from './search-all-routing.module';
+import { PSSRRenderComponentModule } from '../../component/render/render.module';
 
 @NgModule({
   imports: [
       CommonModule,
       FormsModule,
-      SeerCommonComponentsModule,
-      FilterAllRoutingModule
+      PSSRSearchAllRoutingModule,
+      PSSRRenderComponentModule
     ],
-  declarations: [FilterAllComponent],
-  exports: [FilterAllComponent]
+  declarations: [SearchAllRouteComponent],
+  exports: [SearchAllRouteComponent]
 })
-export class SeerFilterAllModule { }
+export class PSSRSearchAllModule { }

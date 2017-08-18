@@ -1,5 +1,1 @@
-<ng-container *ngIf="rooms">
-  <ng-container *ngFor="let room of rooms">
-    <room-preview [room]="room"></room-preview>
-  </ng-container>
-</ng-container>
+<pssr-render-room *ngFor="let room of rooms$ | async" [room]="room"></pssr-render-room>

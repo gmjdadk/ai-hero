@@ -9,7 +9,6 @@ describe('StaticFile', () => {
   });
 
   it('can be constructed', () => {
-    let x = new StaticFile();
-    expect(x).toBeTruthy();
+    expect(new StaticFile()).toBeTruthy();
   });
 });

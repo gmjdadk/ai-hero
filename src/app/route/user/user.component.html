@@ -1,7 +1,7 @@
 <div class="wrap">
   <sk-cube-grid *ngIf="!ship"></sk-cube-grid>
   <ng-container *ngIf="ship">
-    <ship-preview [ship]="ship"></ship-preview>
+    <pssr-render-ship [ship]="ship"></pssr-render-ship>
     <h2>{{ship.Design.ShipDesignName}} (Level {{ship.Design.ShipLevel}})</h2>
     <p>{{ship.Design.ShipDescription}}</p>
   </ng-container>

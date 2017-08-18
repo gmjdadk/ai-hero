@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
+import { Ship } from '../../../../model/model.module';
 import { ShipDesignService } from '../../../data/ship-design/ship-design.service';
-import { Ship } from '../../../../model/ship/ship.model';
-
-import * as xml from 'pixl-xml';
-import 'rxjs';
-import { Observable } from 'rxjs';
 
 export abstract class ShipServiceBase {
 
@@ -18,7 +15,7 @@ export abstract class ShipServiceBase {
   private annotateShipWithDesign(ship: Ship): Observable<Ship> {
     return this.shipDesignService.getShipDesignById(ship.ShipDesignId)
       .map(res => {
-        ship.Design = res.exists? res.design : null;
+        ship.Design = res.exists ? res.design : null;
         return ship;
       });
   }

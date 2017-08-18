@@ -9,7 +9,6 @@ describe('UserBrief', () => {
   });
 
   it('can be constructed', () => {
-    let x = new UserBrief();
-    expect(x).toBeTruthy();
+    expect(new UserBrief()).toBeTruthy();
   });
 });

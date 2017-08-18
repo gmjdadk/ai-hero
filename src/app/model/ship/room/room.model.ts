@@ -1,5 +1,5 @@
 import { Type, Exclude } from 'class-transformer';
-import { RoomDesign } from '../data/room-design.model';
+import { RoomDesign } from '../../data/room-design/room-design.model';
 
 export class Room {
   @Type(() => Number) CapacityUsed: number;

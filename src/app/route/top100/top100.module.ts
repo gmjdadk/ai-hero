@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SeerCommonComponentsModule } from '../common/common.module';
-import { FilterTop100Component } from './filter-top100.component';
-import { FilterTop100RoutingModule } from './filter-top100-routing.module';
+import { Top100RouteComponent } from './top100.component';
+import { PSSRTop100RoutingModule } from './top100-routing.module';
+import { PSSRRenderComponentModule } from '../../component/render/render.module';
 
 @NgModule({
   imports: [
       CommonModule,
-      SeerCommonComponentsModule,
-      FilterTop100RoutingModule
+      PSSRTop100RoutingModule,
+      PSSRRenderComponentModule
     ],
-  declarations: [FilterTop100Component],
-  exports: [FilterTop100Component]
+  declarations: [Top100RouteComponent],
+  exports: [Top100RouteComponent]
 })
-export class SeerFilterTop100Module { }
+export class PSSRTop100Module { }

@@ -1,5 +1,5 @@
 import { Exclude, Type } from 'class-transformer';
-import { StaticSprite } from './static-sprite.model';
+import { StaticSprite } from '../static-sprite/static-sprite.model';
 
 export class ShipDesign {
   @Type(() => Boolean) AllowInteracial: boolean;

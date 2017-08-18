@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgSpinKitModule } from 'ng-spin-kit';
-import { UserComponent } from './user.component';
-import { SeerCommonComponentsModule } from '../common/common.module';
-import { UserRoutingModule } from './user-routing.module';
+import { UserRouteComponent } from './user.component';
+import { PSSRUserRoutingModule } from './user-routing.module';
+import { PSSRRenderComponentModule } from '../../component/render/render.module';
 
 @NgModule({
   imports: [
     CommonModule,
     NgSpinKitModule,
-    SeerCommonComponentsModule,
-    UserRoutingModule
+    PSSRUserRoutingModule,
+    PSSRRenderComponentModule
   ],
   declarations: [
-    UserComponent
+    UserRouteComponent
   ],
   exports: [
-    UserComponent
+    UserRouteComponent
   ]
 })
-export class SeerUserModule { }
+export class PSSRUserModule { }

@@ -19,27 +19,27 @@ export class GridToPxService extends GridServiceBase {
 }
 
 @Pipe({
-	name: "cols2px",
+  name: 'cols2px',
   pure: true
 })
 export class ColumnsToPxPipe implements PipeTransform {
 
   constructor(private gridToPxService: GridToPxService) {}
 
-	transform(value: number): string {
+  transform(value: number): string {
     return this.gridToPxService.columnsToPx(value);
-	}
+  }
 }
 
 @Pipe({
-	name: "rows2px",
+  name: 'rows2px',
   pure: true
 })
 export class RowsToPxPipe implements PipeTransform {
 
   constructor(private gridToPxService: GridToPxService) {}
 
-	transform(value: number): string {
+  transform(value: number): string {
     return this.gridToPxService.rowsToPx(value);
-	}
+  }
 }

@@ -1,21 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
-import { User } from '../../../model/user/user.model';
-import { Ship } from '../../../model/ship/ship.model';
-
-import { TokenByLamService } from '../../../service/token/by-lam/token-by-lam.service';
-import { UserByNameService } from '../../../service/user/by-name/user-by-name.service';
-import { UserByIdentifierService } from '../../../service/user/by-identifier/user-by-identifier.service';
-import { ShipByUserService } from '../../../service/ship/ship/by-user/ship-by-user.service';
-
-import { Subject, Observable } from 'rxjs';
+import { User, UserBrief, Ship } from '../../model/model.module';
+import { TokenByLamService } from '../../service/token/token-service.module';
+import { UserByNameService, UserByIdentifierService } from '../../service/user/user-service.module';
+import { ShipByUserService } from '../../service/ship/ship-service.module';
 
 @Component({
-  selector: 'app-filter-all',
-  templateUrl: './filter-all.component.html',
-  styleUrls: ['./filter-all.component.css']
+  selector: 'pssr-route-search-all',
+  templateUrl: './search-all.component.html',
+  styleUrls: ['./search-all.component.scss']
 })
-export class FilterAllComponent implements OnInit {
+export class SearchAllRouteComponent implements OnInit {
   public users: {user: User, ship: Ship}[];
 
   public userSearch: string;
@@ -29,14 +26,14 @@ export class FilterAllComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let tokenObs: Observable<string> = this.tokenByLamService.getTokenByLam();
+    const tokenObs: Observable<string> = this.tokenByLamService.getTokenByLam();
 
     this.userSearchSubject
       .debounceTime(250)
       .map(res => res.trim())
       .distinctUntilChanged()
       .do(() => this.users = null)
-      .combineLatest(tokenObs, (uname, token) => { return { uname: uname, token: token } })
+      .combineLatest(tokenObs, (uname, token) => ({ uname: uname, token: token }))
       .flatMap(res => this.usersByNameService.getAllUsersMatching(res.token, res.uname))
       .map(users => this.users = users.map(x => ({user: x, ship: null}) ))
       .do(users => {
@@ -45,7 +42,7 @@ export class FilterAllComponent implements OnInit {
           .concatMap(i => Observable.of(i).delay(Math.min(50 + i.index * 25, 1000)))
           .combineLatest(tokenObs)
           .flatMap(res => {
-            let [val, token] = res;
+            const [val, token] = res;
             return this.userByIdentifierService.getUserByIdentifier(token, val.unwrap.user.Id)
               .flatMap(user => this.shipByUserService.getShipByUser(user.user))
               .map(ship => ({index: val.index, ship: ship}));

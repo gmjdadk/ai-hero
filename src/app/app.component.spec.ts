@@ -2,8 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
-
-import { LayoutTemplateModule } from './component/layout-template/layout-template.module';
+import { PSSRLayoutTemplateComponentModule } from './component/layout-template/layout-template.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -13,7 +12,7 @@ describe('AppComponent', () => {
       ],
       imports: [
         RouterTestingModule,
-        LayoutTemplateModule
+        PSSRLayoutTemplateComponentModule
       ]
     }).compileComponents();
   }));

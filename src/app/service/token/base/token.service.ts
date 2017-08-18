@@ -5,9 +5,9 @@ import * as md5 from 'md5';
 
 export abstract class TokenServiceBase {
   /* These will probably be common among child providers */
-  protected static DEVICE_TYPE = "DeviceTypeMac";
-  protected static MD5_CHECKSUM_SALT = "savysoda";
-  protected static WAIVE_ADVERTISING_KEY = "\"\"";
+  protected static DEVICE_TYPE = 'DeviceTypeMac';
+  protected static MD5_CHECKSUM_SALT = 'savysoda';
+  protected static WAIVE_ADVERTISING_KEY = '""';
 
   constructor(
     protected http: Http

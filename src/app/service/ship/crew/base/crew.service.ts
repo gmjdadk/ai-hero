@@ -1,12 +1,9 @@
 import { Http } from '@angular/http';
 import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs/Observable';
 
-import { CharacterDesignService } from '../../../data/character-design/character-design.service';
-import { Crew } from '../../../../model/ship/crew.model';
-
-import * as xml from 'pixl-xml';
-import 'rxjs';
-import { Observable } from 'rxjs';
+import { Crew } from '../../../../model/model.module';
+import { CharacterDesignService } from '../../../data/data-service.module';
 
 export abstract class CrewServiceBase {
 
@@ -18,7 +15,7 @@ export abstract class CrewServiceBase {
   private annotateCrewWithDesign(crew: Crew): Observable<Crew> {
     return this.characterDesignService.getCharacterDesignById(crew.CharacterDesignId)
       .map(res => {
-        crew.Design = res.exists? res.design : null;
+        crew.Design = res.exists ? res.design : null;
         return crew;
       });
   }

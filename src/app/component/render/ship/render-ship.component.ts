@@ -1,62 +1,74 @@
-import { Input, ElementRef, HostBinding, Component, OnInit } from '@angular/core';
+import { Input, ElementRef, HostBinding, Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { Room } from '../../../../../model/ship/room.model';
-import { Ship } from '../../../../../model/ship/ship.model';
+import { Room, Ship } from '../../../model/model.module';
+import { GridToPxService } from '../../../service/render/render-service.module';
+import { RoomByShipService } from '../../../service/ship/ship-service.module';
 
-import { RoomByShipService } from '../../../../../service/ship/room/by-ship/room-by-ship.service';
-import { LayoutService } from '../../../../../service/preview/layout/layout.service';
+/* The maximum width of a ship before it should be downscaled */
+const MAXIMUM_SHIP_WIDTH = 1000;
+/* The maximum height of a ship before it should be downscaled */
+const MAXIMUM_SHIP_HEIGHT = 700;
 
 @Component({
-  selector: 'ship-preview',
-  templateUrl: './ship-preview.component.html',
-  styleUrls: ['./ship-preview.component.scss'],
-  providers: [
-    LayoutService
-  ]
+  selector: 'pssr-render-ship',
+  templateUrl: './render-ship.component.html',
+  styleUrls: ['./render-ship.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShipPreviewComponent implements OnInit {
-  private _ship: Ship;
-  public rooms: Room[]; // FIXME
+export class RenderShipComponent implements OnInit {
+  public rooms$: Observable<Room[]>;
+
+  private inspectShipSubject: BehaviorSubject<Ship> = new BehaviorSubject<Ship>(null);
 
   constructor(
-    private layoutService: LayoutService,
+    private gridToPxService: GridToPxService,
     private roomByShipService: RoomByShipService,
     private element: ElementRef
   ) { }
 
+  ngOnInit() {
+    this.rooms$ = this.inspectShipSubject
+      .switchMap(ship => this.roomByShipService.getRoomsByShip(ship));
+  }
+
   @Input()
   set ship(ship: Ship) {
-    this._ship = ship;
-    // Reload rooms on binding change
-    this.roomByShipService.getRoomsByShip(this._ship).subscribe(res => this.rooms = res);
+    this.inspectShipSubject.next(ship);
   }
 
-  get ship() {
-    return this._ship;
+  get ship(): Ship {
+    return this.inspectShipSubject.getValue();
   }
 
-  ngOnInit() {
+  get zoomScale(): number {
+    const width = this.gridToPxService.columnsToUnits(this.ship.Design.Columns);
+    const height = this.gridToPxService.rowsToUnits(this.ship.Design.Rows);
+    return Math.min(MAXIMUM_SHIP_WIDTH / width, MAXIMUM_SHIP_HEIGHT / height, 1);
   }
 
   @HostBinding('style.transform')
   get renderZoom(): string {
-    
-    //let rect = this.element.nativeElement.getBoundingClientRect();
-    let parentRect = this.element.nativeElement.parentElement.getBoundingClientRect();
-    let width = parseInt(this.layoutService.columnsToUnits(this.ship.Design.Columns).slice(0, -2));
-    let height = parseInt(this.layoutService.rowsToUnits(this.ship.Design.Rows).slice(0, -2));
-    return 'scale(' + Math.min(parentRect.width / width, 700 / height, 1).toString() + ')';
+    return 'scale(' + this.zoomScale.toString() + ')';
+  }
+
+  @HostBinding('style.margin')
+  get renderMargin(): string {
+    const yMargin = 0.5 * (1 - this.zoomScale) * -this.gridToPxService.rowsToUnits(this.ship.Design.Rows);
+    const yPart = yMargin.toString() + 'px';
+    return [yPart, 'auto'].join(' ');
   }
 
   @HostBinding('style.width')
   get renderWidth(): string {
-    return this.layoutService.columnsToUnits(this.ship.Design.Columns);
+    return this.gridToPxService.columnsToPx(this.ship.Design.Columns);
   }
 
   @HostBinding('style.height')
   get renderHeight(): string {
-    return this.layoutService.rowsToUnits(this.ship.Design.Rows);
+    return this.gridToPxService.rowsToPx(this.ship.Design.Rows);
   }
 
   @HostBinding('style.backgroundImage')

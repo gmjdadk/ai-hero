@@ -21,16 +21,6 @@ export { ShipServiceBase, ShipByUserService };
   imports: [
     PSSRHttpServiceModule
   ],
-  declarations: [
-    // Crew
-    CrewByShipService,
-    CrewByTokenService,
-    // Room
-    RoomByShipService,
-    RoomByTokenService,
-    // Ship
-    ShipByUserService
-  ],
   providers: [
     // Crew
     CrewByShipService,

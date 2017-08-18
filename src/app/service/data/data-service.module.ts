@@ -9,13 +9,6 @@ import { SpriteService } from './sprite/sprite.service';
 export { CharacterDesignService, FileService, RoomDesignService, ShipDesignService, SpriteService };
 
 @NgModule({
-  declarations: [
-    CharacterDesignService,
-    FileService,
-    RoomDesignService,
-    ShipDesignService,
-    SpriteService
-  ],
   providers: [
     CharacterDesignService,
     FileService,

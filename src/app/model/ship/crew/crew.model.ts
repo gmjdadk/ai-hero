@@ -1,5 +1,5 @@
 import { Type, Exclude } from 'class-transformer';
-import { CharacterDesign } from '../data/character-design.model';
+import { CharacterDesign } from '../../data/character-design/character-design.model';
 
 export class Crew {
   @Type(() => Number) AbilityImprovement: number;

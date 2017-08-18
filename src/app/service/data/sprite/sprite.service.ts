@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import { PersistentHttpService } from '../../http/persistent/persistent-http.service';
-import { Type, Exclude, plainToClass } from 'class-transformer';
+import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs/Observable';
+
+import { StaticSprite } from '../../../model/model.module';
 import { FileService } from '../file/file.service';
-
-import * as xml from 'pixl-xml';
-import 'rxjs';
-import { Observable } from 'rxjs';
-
-import { StaticSprite } from '../../../model/data/static-sprite.model';
+import { PersistentHttpService, XMLSerializerService } from '../../http/http-service.module';
 
 @Injectable()
 export class SpriteService {
@@ -17,6 +14,7 @@ export class SpriteService {
 
   constructor(
     private http: PersistentHttpService,
+    private xmlSerializerService: XMLSerializerService,
     private fileService: FileService
   ) { }
 
@@ -27,7 +25,7 @@ export class SpriteService {
   private annotateSpriteWithSourceFile(sprite: StaticSprite): Observable<StaticSprite> {
     return this.fileService.getFileById(sprite.ImageFileId)
       .map(res => {
-        sprite.File = res.exists? res.file : null;
+        sprite.File = res.exists ? res.file : null;
         return sprite;
       });
   }
@@ -37,7 +35,7 @@ export class SpriteService {
       ? this.sprites
       : this.sprites = this.http
         .get('x-cache:43200,[pss:/FileService/ListSprites]', {})
-        .map(res => xml.parse(res.text()))
+        .map(res => this.xmlSerializerService.unserialise(res.text()))
         .map(res => res['ListSprites']['Sprites']['Sprite'])
         .map(res => plainToClass(StaticSprite, res as Object[]))
         .map(res => res.map(c => this.annotateSpriteWithSourceFile(c)))
@@ -58,6 +56,6 @@ export class SpriteService {
   getSpriteById(id: number): Observable<{ exists: boolean, sprite?: StaticSprite }> {
     return this.getSpritesMap()
       .map(res => res.get(id))
-      .map(res => { return { exists: res !== undefined, sprite: res } });
+      .map(res => ({ exists: res !== undefined, sprite: res }));
   }
 }

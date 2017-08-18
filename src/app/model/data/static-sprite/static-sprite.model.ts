@@ -1,5 +1,5 @@
 import { Type, Exclude } from 'class-transformer';
-import { StaticFile } from './static-file.model';
+import { StaticFile } from '../static-file/static-file.model';
 
 export class StaticSprite {
   @Type(() => Number) Height: number;

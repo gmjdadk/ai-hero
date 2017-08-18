@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs/Observable';
 
+import { Room } from '../../../../model/model.module';
 import { RoomDesignService } from '../../../data/room-design/room-design.service';
-import { Room } from '../../../../model/ship/room.model';
-
-import * as xml from 'pixl-xml';
-import 'rxjs';
-import { Observable } from 'rxjs';
 
 // Rooms you can't walk across
-const NON_PASSABLE_ROOMS = ["Wall"];
+const NON_PASSABLE_ROOMS = ['Wall'];
 // Rooms that allow you to move up and down
-const VERTICAL_PASSABLE_ROOMS = ["Lift"];
+const VERTICAL_PASSABLE_ROOMS = ['Lift'];
 // Rooms with these status should be ignored
-const ROOM_STATUS_IGNORE = ["Inventory"];
+const ROOM_STATUS_IGNORE = ['Inventory'];
 
 export abstract class RoomServiceBase {
 
@@ -26,7 +23,7 @@ export abstract class RoomServiceBase {
   private annotateRoomWithDesign(room: Room): Observable<Room> {
     return this.roomDesignService.getRoomDesignById(room.RoomDesignId)
       .map(res => {
-        room.Design = res.exists? res.design : null;
+        room.Design = res.exists ? res.design : null;
         return room;
       });
   }
@@ -38,17 +35,17 @@ export abstract class RoomServiceBase {
 
   private annotateLinksForRoom(room: Room, others: Room[]) {
     // This room is non-passable?
-    if (NON_PASSABLE_ROOMS.indexOf(room.Design.RoomType) >= 0) return;
+    if (NON_PASSABLE_ROOMS.indexOf(room.Design.RoomType) >= 0) { return; }
     // Take bottom left edge
-    let myPassableX = room.Column;
-    let myPassableY = room.Row + room.Design.Rows;
-    for (let adjacent of others) {
+    const myPassableX = room.Column;
+    const myPassableY = room.Row + room.Design.Rows;
+    for (const adjacent of others) {
       // Other room is non-passable?
-      if (NON_PASSABLE_ROOMS.indexOf(adjacent.Design.RoomType) >= 0) continue;
+      if (NON_PASSABLE_ROOMS.indexOf(adjacent.Design.RoomType) >= 0) { continue; }
       // Does our bottom left edge meet with the other bottom right edge?
-      let otherPassableX = adjacent.Column + adjacent.Design.Columns;
-      let otherPassableY = adjacent.Row + adjacent.Design.Rows;
-      let meetsOnLeftEdge = (myPassableX === otherPassableX /* edges touching */
+      const otherPassableX = adjacent.Column + adjacent.Design.Columns;
+      const otherPassableY = adjacent.Row + adjacent.Design.Rows;
+      const meetsOnLeftEdge = (myPassableX === otherPassableX /* edges touching */
                             && myPassableY === otherPassableY /* floor eq */);
       if (meetsOnLeftEdge) {
         // Dynamic programming optimisation:
@@ -58,10 +55,10 @@ export abstract class RoomServiceBase {
       }
       if (VERTICAL_PASSABLE_ROOMS.indexOf(room.Design.RoomType) >= 0) {
         // If it's a lift, add rooms below also. The lift above will add this lift.
-        let myOriginX = room.Column;
-        let otherOriginX = adjacent.Column;
-        let otherClimbableY = adjacent.Row;
-        let meetsOnBottomEdge = (myPassableY === otherClimbableY /* bottom touching */
+        const myOriginX = room.Column;
+        const otherOriginX = adjacent.Column;
+        const otherClimbableY = adjacent.Row;
+        const meetsOnBottomEdge = (myPassableY === otherClimbableY /* bottom touching */
                                 && myOriginX === otherOriginX /* left edge eq */);
         if (meetsOnBottomEdge) {
           room.Links.push(adjacent);

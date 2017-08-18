@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import { PersistentHttpService } from '../../http/persistent/persistent-http.service';
-import { Type, plainToClass } from 'class-transformer';
+import { plainToClass } from 'class-transformer';
+import { Observable } from 'rxjs/Observable';
+
+import { ShipDesign } from '../../../model/model.module';
 import { SpriteService } from '../sprite/sprite.service';
-
-import * as xml from 'pixl-xml';
-import 'rxjs';
-import { Observable } from 'rxjs';
-
-import { ShipDesign } from '../../../model/data/ship-design.model';
+import { PersistentHttpService, XMLSerializerService } from '../../http/http-service.module';
 
 @Injectable()
 export class ShipDesignService {
@@ -17,6 +14,7 @@ export class ShipDesignService {
 
   constructor(
     private http: PersistentHttpService,
+    private xmlSerializerService: XMLSerializerService,
     private spriteService: SpriteService
   ) { }
 
@@ -30,10 +28,10 @@ export class ShipDesignService {
         this.spriteService.getSpriteById(ship.ExteriorSpriteId),
         this.spriteService.getSpriteById(ship.MiniShipSpriteId)
       ]).map(res => {
-        let [interior, exterior, small] = res;
-        ship.BackgroundSprite = interior.exists? interior.sprite : null;
-        ship.ForegroundSprite = exterior.exists? exterior.sprite : null;
-        ship.SmallShipSprite = small.exists? small.sprite : null;
+        const [interior, exterior, small] = res;
+        ship.BackgroundSprite = interior.exists ? interior.sprite : null;
+        ship.ForegroundSprite = exterior.exists ? exterior.sprite : null;
+        ship.SmallShipSprite = small.exists ? small.sprite : null;
         return ship;
       });
   }
@@ -43,7 +41,7 @@ export class ShipDesignService {
       ? this.shipDesigns
       : this.shipDesigns = this.http
         .get('x-cache:43200,[pss:/ShipService/ListAllShipDesigns2?languageKey=en]', {})
-        .map(res => xml.parse(res.text()))
+        .map(res => this.xmlSerializerService.unserialise(res.text()))
         .map(res => res['ListShipDesigns']['ShipDesigns']['ShipDesign'])
         .map(res => plainToClass(ShipDesign, res as Object[]))
         .map(res => res.map(c => this.annotateShipDesignWithSprites(c)))
@@ -51,7 +49,7 @@ export class ShipDesignService {
         .publishReplay(1)
         .refCount();
   }
-  
+
   getShipDesignsMap(): Observable<Map<number, ShipDesign>> {
     return this.shipDesignsMap
       ? this.shipDesignsMap
@@ -64,6 +62,6 @@ export class ShipDesignService {
   getShipDesignById(id: number): Observable<{ exists: boolean, design?: ShipDesign }> {
     return this.getShipDesignsMap()
       .map(res => res.get(id))
-      .map(res => { return { exists: res !== undefined, design: res } });
+      .map(res => ({ exists: res !== undefined, design: res }));
   }
 }

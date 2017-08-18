@@ -9,7 +9,6 @@ describe('Ship', () => {
   });
 
   it('can be constructed', () => {
-    let x = new Ship();
-    expect(x).toBeTruthy();
+    expect(new Ship()).toBeTruthy();
   });
 });

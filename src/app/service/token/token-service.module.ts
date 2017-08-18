@@ -13,9 +13,6 @@ export { TokenServiceBase, TokenByLamService };
     PSSRHttpServiceModule,
     PSSRDeviceServiceModule
   ],
-  declarations: [
-    TokenByLamService
-  ],
   providers: [
     TokenByLamService
   ]

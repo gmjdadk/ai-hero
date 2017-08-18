@@ -1,21 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
-import { User } from '../../../model/user/user.model';
-import { Ship } from '../../../model/ship/ship.model';
-
-import { TokenByLamService } from '../../../service/token/by-lam/token-by-lam.service';
-import { UserByIdentifierService } from '../../../service/user/by-identifier/user-by-identifier.service';
-import { ShipByUserService } from '../../../service/ship/ship/by-user/ship-by-user.service';
-
-import { Observable } from 'rxjs';
+import { User, Ship } from '../../model/model.module';
+import { TokenByLamService } from '../../service/token/token-service.module';
+import { UserByIdentifierService } from '../../service/user/user-service.module';
+import { ShipByUserService } from '../../service/ship/ship-service.module';
 
 @Component({
-  selector: 'app-user',
+  selector: 'pssr-route-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UserRouteComponent implements OnInit {
   public user: User;
   public ship: Ship;
 
@@ -27,11 +24,11 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let tokenObs: Observable<string> = this.tokenByLamService.getTokenByLam();
+    const tokenObs: Observable<string> = this.tokenByLamService.getTokenByLam();
 
     this.route.params
-      .map(params => parseInt(params['id']))
-      .combineLatest(tokenObs, (userId, token) => { return { userId, token } })
+      .map(params => parseInt(params['id'], 10))
+      .combineLatest(tokenObs, (userId, token) => ({ userId, token }))
       .flatMap(res => this.userByIdentifierService.getUserByIdentifier(res.token, res.userId))
       .map(user => this.user = user.user)
       .flatMap(maybeUser => this.shipByUserService.getShipByUser(maybeUser))

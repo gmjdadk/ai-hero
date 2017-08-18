@@ -25,4 +25,4 @@ import * as StdLayout from './std-layout/layout.component';
     StdLayout.LayoutComponent
   ]
 })
-export class LayoutTemplateModule { }
+export class PSSRLayoutTemplateComponentModule { }

@@ -1,34 +1,25 @@
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, XHRBackend } from '@angular/http';
-import { NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PersistenceModule, PersistenceService } from 'angular-persistence';
-
-import { LayoutTemplateModule } from './component/layout-template/layout-template.module';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { PixelStarshipsAPIInterceptorBackend } from './interceptor/interceptor.module';
+import { PSSRLayoutTemplateComponentModule } from './component/layout-template/layout-template.module';
 
-import { PixelStarshipsAPIInterceptorBackend } from './interceptor/api/pss-api.interceptor';
-
-import { SeerUserModule } from './component/route/user/user.module';
-import { SeerFilterAllModule } from './component/route/filter-all/filter-all.module';
-import { SeerFilterTop100Module } from './component/route/filter-top100/filter-top100.module';
-
-import { TokenByLamService } from './service/token/by-lam/token-by-lam.service';
-import { LocalAdministeredMacService } from './service/device/mac/lam.service';
-import { PersistentHttpService } from './service/http/persistent/persistent-http.service';
-
-import { PSSRModelsModule, CharacterDesign } from './model/model.module';
-import { NotFoundComponent } from './route/src/app/route/not-found/not-found.component';
+import { PSSRDataServiceModule } from './service/data/data-service.module';
+import { PSSRDeviceServiceModule } from './service/device/device-service.module';
+import { PSSRHttpServiceModule } from './service/http/http-service.module';
+import { PSSRRenderServiceModule } from './service/render/render-service.module';
+import { PSSRShipServiceModule } from './service/ship/ship-service.module';
+import { PSSRTokenServiceModule } from './service/token/token-service.module';
+import { PSSRUserServiceModule } from './service/user/user-service.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NotFoundComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     // Packages
     BrowserModule,
@@ -38,16 +29,20 @@ import { NotFoundComponent } from './route/src/app/route/not-found/not-found.com
     PersistenceModule,
     // PSSR Modules
     AppRoutingModule,
-    LayoutTemplateModule,
-    SeerUserModule,
-    SeerFilterAllModule,
-    SeerFilterTop100Module,
-    PSSRModelsModule
+    PSSRLayoutTemplateComponentModule,
+    // Services
+    PSSRDataServiceModule,
+    PSSRDeviceServiceModule,
+    PSSRHttpServiceModule,
+    PSSRRenderServiceModule,
+    PSSRShipServiceModule,
+    PSSRTokenServiceModule,
+    PSSRUserServiceModule
   ],
   providers: [
     { provide: XHRBackend, useClass: PixelStarshipsAPIInterceptorBackend },
     PersistenceService
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

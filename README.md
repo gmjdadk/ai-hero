@@ -3,6 +3,10 @@
 
 [Production Server](https://pssrank-28303.firebaseapp.com)
 
+linear-gradient(rgba(255, 225, 0, 0.35), rgba(0,0,0,.3) 40%)
+linear-gradient(rgba(192, 185, 172, 0.35), rgba(0,0,0,.3) 40%)
+linear-gradient(rgba(221, 173, 77, 0.35), rgba(0,0,0,.3) 40%)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.4.
 
 ## Development server

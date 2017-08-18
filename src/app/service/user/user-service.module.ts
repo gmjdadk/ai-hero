@@ -14,12 +14,6 @@ export { UserServiceBase, UserByIdentifierService, UserByNameService, UserByRank
   imports: [
     PSSRHttpServiceModule
   ],
-  declarations: [
-    UserByIdentifierService,
-    UserByNameService,
-    UserByRankingService,
-    UserByTokenService
-  ],
   providers: [
     UserByIdentifierService,
     UserByNameService,

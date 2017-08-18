@@ -1,19 +1,16 @@
-import { Component, Input, HostBinding, OnInit } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 
-import { Ship } from '../../../../../model/ship/ship.model';
+import { Ship } from '../../../model/model.module';
 
 @Component({
-  selector: 'small-ship-preview',
-  templateUrl: './small-ship-preview.component.html',
-  styleUrls: ['./small-ship-preview.component.scss']
+  selector: 'pssr-render-small-ship',
+  templateUrl: './render-small-ship.component.html',
+  styleUrls: ['./render-small-ship.component.scss']
 })
-export class SmallShipPreviewComponent implements OnInit {
+export class RenderSmallShipComponent {
   @Input() ship: Ship;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   get renderWidth(): string {
     return this.ship.Design.SmallShipSprite.Width.toString() + 'px';
@@ -28,8 +25,8 @@ export class SmallShipPreviewComponent implements OnInit {
   }
 
   get renderBackgroundPosition(): string {
-    let xPart = '-' + this.ship.Design.SmallShipSprite.X.toString() + 'px';
-    let yPart = '-' + this.ship.Design.SmallShipSprite.Y.toString() + 'px';
+    const xPart = '-' + this.ship.Design.SmallShipSprite.X.toString() + 'px';
+    const yPart = '-' + this.ship.Design.SmallShipSprite.Y.toString() + 'px';
     return [xPart, yPart].join(' ');
   }
 

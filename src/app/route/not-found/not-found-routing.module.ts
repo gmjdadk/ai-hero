@@ -10,4 +10,4 @@ import { NotFoundRouteComponent } from './not-found.component';
   ],
   exports: [RouterModule]
 })
-export class NotFoundRoutingModule { }
+export class PSSRPageNotFoundRoutingModule { }

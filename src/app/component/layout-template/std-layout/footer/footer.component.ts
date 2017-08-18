@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'seer-layout-footer',
+  selector: 'pssr-layout-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
