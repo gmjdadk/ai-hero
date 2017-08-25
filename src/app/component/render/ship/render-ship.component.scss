@@ -2,12 +2,12 @@
     display: block;
     position: relative;
     padding: 20px 0;
-    background-repeat: no-repeat;
+    margin: 0 auto;
     max-height: 100%;
-    //animation: ship_dropin .5s ease-in-out forwards;
+    animation: ship_dropin .5s ease-in-out forwards;
 }
-/*
+
 @keyframes ship_dropin {
     from { opacity: 0; top: -50px; }
     to   { opacity: 1; top: 0 }
-}*/
+}

@@ -1,6 +1,6 @@
 <div class="wrap">
   <div class="render-wrap">
-    <pssr-render-ship transformToFit scaleMaxHeight="800" scaleMaxWidth="1024" *ngIf="ship" [ship]="ship"></pssr-render-ship>
+    <pssr-render-ship *ngIf="ship" [ship]="ship"></pssr-render-ship>
   </div>
   <sk-cube-grid *ngIf="!ship"></sk-cube-grid>
   <ng-container *ngIf="ship">

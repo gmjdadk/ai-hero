@@ -7,11 +7,6 @@ import { Room, Ship } from '../../../model/model.module';
 import { GridToPxService } from '../../../service/render/render-service.module';
 import { RoomByShipService } from '../../../service/ship/ship-service.module';
 
-/* The maximum width of a ship before it should be downscaled */
-const MAXIMUM_SHIP_WIDTH = 1000;
-/* The maximum height of a ship before it should be downscaled */
-const MAXIMUM_SHIP_HEIGHT = 700;
-
 @Component({
   selector: 'pssr-render-ship',
   templateUrl: './render-ship.component.html',
@@ -51,5 +46,10 @@ export class RenderShipComponent implements OnInit {
       this.gridToPxService.rowsToUnits(this.ship.Design.Rows).toString()
     ];
     return components.join(' ');
+  }
+
+  @HostBinding("style.maxWidth")
+  get maxWidthOfShip(): string {
+    return this.gridToPxService.columnsToPx(this.ship.Design.Columns);
   }
 }
