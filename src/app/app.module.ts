@@ -43,7 +43,8 @@ import { PSSRUserServiceModule } from './service/user/user-service.module';
   ],
   providers: [
     { provide: XHRBackend, useClass: PixelStarshipsAPIInterceptorBackend },
-    PersistenceService
+    PersistenceService,
+    Angulartics2GoogleAnalytics
   ],
   bootstrap: [AppComponent]
 })

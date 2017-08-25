@@ -1,5 +1,3 @@
-<!--<span class="room-name">{{room.Design.RoomShortName}}</span>-->
-
 <svg
     [attr.x]="room.Column | cols2px"
     [attr.y]="room.Row | rows2px"
@@ -11,8 +9,8 @@
     <image
         [attr.x]="-room.Design.Sprite.X"
         [attr.y]="-room.Design.Sprite.Y"
-        [attr.width]="image.naturalWidth"
-        [attr.height]="image.naturalHeight"
+        [attr.width]="spriteSheetWidth$ | async"
+        [attr.height]="spriteSheetHeight$ | async"
         [attr.xlink:href]="room.Design.Sprite.File.fullPath"
     >
     </image>
