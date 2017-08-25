@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, XHRBackend } from '@angular/http';
 import { PersistenceModule, PersistenceService } from 'angular-persistence';
+import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +28,7 @@ import { PSSRUserServiceModule } from './service/user/user-service.module';
     FormsModule,
     HttpModule,
     PersistenceModule,
+    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
     // PSSR Modules
     AppRoutingModule,
     PSSRLayoutTemplateComponentModule,
