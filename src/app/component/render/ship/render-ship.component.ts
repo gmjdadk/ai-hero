@@ -48,7 +48,7 @@ export class RenderShipComponent implements OnInit {
     return components.join(' ');
   }
 
-  @HostBinding("style.maxWidth")
+  @HostBinding('style.maxWidth')
   get maxWidthOfShip(): string {
     return this.gridToPxService.columnsToPx(this.ship.Design.Columns);
   }
