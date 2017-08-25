@@ -3,11 +3,11 @@
     position: relative;
     padding: 20px 0;
     background-repeat: no-repeat;
-    transform-origin: 0;
-    animation: ship_dropin .5s ease-in-out forwards;
+    max-height: 100%;
+    //animation: ship_dropin .5s ease-in-out forwards;
 }
-
+/*
 @keyframes ship_dropin {
     from { opacity: 0; top: -50px; }
     to   { opacity: 1; top: 0 }
-}
+}*/

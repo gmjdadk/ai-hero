@@ -1,1 +1,18 @@
-<pssr-render-room *ngFor="let room of rooms$ | async" [room]="room"></pssr-render-room>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    [attr.viewBox]="viewBoxOfShip"
+>
+    <!-- Hull Sprite -->
+    <svg:image
+        [attr.xlink:href]="ship.Design.BackgroundSprite.File.fullPath"
+        [attr.x]="0"
+        [attr.y]="0"
+        [attr.width]="ship.Design.Columns | cols2px"
+        [attr.height]="ship.Design.Rows | rows2px">
+    </svg:image>
+
+    <!-- Rooms -->
+    <g pssr-svg-render-room *ngFor="let room of rooms$ | async" [room]="room"></g>
+</svg>

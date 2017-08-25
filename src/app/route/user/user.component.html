@@ -1,7 +1,9 @@
 <div class="wrap">
+  <div class="render-wrap">
+    <pssr-render-ship transformToFit scaleMaxHeight="800" scaleMaxWidth="1024" *ngIf="ship" [ship]="ship"></pssr-render-ship>
+  </div>
   <sk-cube-grid *ngIf="!ship"></sk-cube-grid>
   <ng-container *ngIf="ship">
-    <pssr-render-ship [ship]="ship"></pssr-render-ship>
     <h2>{{ship.Design.ShipDesignName}} (Level {{ship.Design.ShipLevel}})</h2>
     <p>{{ship.Design.ShipDescription}}</p>
   </ng-container>

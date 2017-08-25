@@ -1,1 +1,21 @@
-<span class="room-name">{{room.Design.RoomShortName}}</span>
+<!--<span class="room-name">{{room.Design.RoomShortName}}</span>-->
+
+<svg
+    [attr.x]="room.Column | cols2px"
+    [attr.y]="room.Row | rows2px"
+    [attr.width]="room.Design.Columns | cols2px"
+    [attr.height]="room.Design.Rows | rows2px"
+    [attr.viewBox]="viewBoxOfRoom"
+>
+    <!-- Room Image -->
+    <image
+        [attr.x]="-room.Design.Sprite.X"
+        [attr.y]="-room.Design.Sprite.Y"
+        [attr.width]="image.naturalWidth"
+        [attr.height]="image.naturalHeight"
+        [attr.xlink:href]="room.Design.Sprite.File.fullPath"
+    >
+    </image>
+    <!-- Room Title -->
+    <text dy="9px" dx="2px">{{room.Design.RoomShortName}}</text>
+</svg>

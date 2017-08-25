@@ -1,4 +1,4 @@
-import { Input, ElementRef, HostBinding, Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Input, ElementRef, HostBinding, Component, OnInit, AfterContentInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -15,13 +15,13 @@ const MAXIMUM_SHIP_HEIGHT = 700;
 @Component({
   selector: 'pssr-render-ship',
   templateUrl: './render-ship.component.html',
-  styleUrls: ['./render-ship.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./render-ship.component.scss']
 })
 export class RenderShipComponent implements OnInit {
   public rooms$: Observable<Room[]>;
 
   private inspectShipSubject: BehaviorSubject<Ship> = new BehaviorSubject<Ship>(null);
+  private fitRef: any;
 
   constructor(
     private gridToPxService: GridToPxService,
@@ -43,36 +43,13 @@ export class RenderShipComponent implements OnInit {
     return this.inspectShipSubject.getValue();
   }
 
-  get zoomScale(): number {
-    const width = this.gridToPxService.columnsToUnits(this.ship.Design.Columns);
-    const height = this.gridToPxService.rowsToUnits(this.ship.Design.Rows);
-    return Math.min(MAXIMUM_SHIP_WIDTH / width, MAXIMUM_SHIP_HEIGHT / height, 1);
-  }
-
-  @HostBinding('style.transform')
-  get renderZoom(): string {
-    return 'scale(' + this.zoomScale.toString() + ')';
-  }
-
-  @HostBinding('style.margin')
-  get renderMargin(): string {
-    const yMargin = 0.5 * (1 - this.zoomScale) * -this.gridToPxService.rowsToUnits(this.ship.Design.Rows);
-    const yPart = yMargin.toString() + 'px';
-    return [yPart, 'auto'].join(' ');
-  }
-
-  @HostBinding('style.width')
-  get renderWidth(): string {
-    return this.gridToPxService.columnsToPx(this.ship.Design.Columns);
-  }
-
-  @HostBinding('style.height')
-  get renderHeight(): string {
-    return this.gridToPxService.rowsToPx(this.ship.Design.Rows);
-  }
-
-  @HostBinding('style.backgroundImage')
-  get renderBackgroundImage(): string {
-    return 'url("' + this.ship.Design.BackgroundSprite.File.fullPath + '")';
+  get viewBoxOfShip(): string {
+    const components = [
+      0,
+      0,
+      this.gridToPxService.columnsToUnits(this.ship.Design.Columns).toString(),
+      this.gridToPxService.rowsToUnits(this.ship.Design.Rows).toString()
+    ];
+    return components.join(' ');
   }
 }
