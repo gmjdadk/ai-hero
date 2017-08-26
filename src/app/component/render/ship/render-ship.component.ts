@@ -1,4 +1,4 @@
-import { Input, ElementRef, HostBinding, Component, OnInit, AfterContentInit, ChangeDetectionStrategy } from '@angular/core';
+import { Input, ElementRef, HostBinding, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -16,7 +16,6 @@ export class RenderShipComponent implements OnInit {
   public rooms$: Observable<Room[]>;
 
   private inspectShipSubject: BehaviorSubject<Ship> = new BehaviorSubject<Ship>(null);
-  private fitRef: any;
 
   constructor(
     private gridToPxService: GridToPxService,
