@@ -51,7 +51,6 @@ export class PixelStarshipsAPIInterceptorBackend extends XHRBackend {
           // req.headers.set('User-Agent', API_USER_AGENT);
           // Add current API base url
           req.url = endpoint + urlComponent[1];
-          console.log(req.url);
         }
       })
       /* rxjs/pull/2691 */
