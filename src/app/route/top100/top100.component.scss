@@ -17,6 +17,7 @@
         background: rgba(0, 0, 0, .3);
         text-decoration: none;
         color: #fff;
+        transition: background .5s ease-in-out;
 
         &:active {
             color: #fff;
@@ -25,15 +26,54 @@
         &:hover {
             background: rgba(0, 0, 0, .5);
         }
+
+        &[data-player-rank="1"],
+        &[data-player-rank="2"],
+        &[data-player-rank="3"] {
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+        }
+
+        &[data-player-rank="1"] {
+            background: linear-gradient(rgba(255, 225, 0, 0.25), rgba(0, 0, 0, .3) 30%);
+
+            &:hover {
+                background: linear-gradient(rgba(255, 225, 0, 0.35), rgba(0, 0, 0, .5) 30%);
+            }
+        }
+
+        &[data-player-rank="2"] {
+            background: linear-gradient(rgba(192, 185, 172, 0.25), rgba(0, 0, 0, .3) 30%);
+
+            &:hover {
+                background: linear-gradient(rgba(192, 185, 172, 0.35), rgba(0, 0, 0, .5) 30%);
+            }
+        }
+
+        &[data-player-rank="3"] {
+            background: linear-gradient(rgba(221, 173, 77, 0.25), rgba(0, 0, 0, .3) 30%);
+
+            &:hover {
+                background: linear-gradient(rgba(221, 173, 77, 0.35), rgba(0, 0, 0, .5) 30%);
+            }
+        }
     }
 
     & h1 {
         font-size: 1.2rem;
         line-height: 5rem;
+
+        @media screen and (max-width: 768px) {
+            font-size: .8rem;
+        }
     }
 
     & h2 {
         font-size: 1rem;
+
+        @media screen and (max-width: 768px) {
+            font-size: .6rem;
+        }
     }
 
     & a > * {
@@ -48,5 +88,9 @@
 
     & a > .user-info > * {
         margin: 0 1rem;
+
+        @media screen and (max-width: 768px) {
+            margin: 0 .25rem;
+        }
     }
 }

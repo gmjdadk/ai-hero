@@ -1,6 +1,6 @@
 <ul *ngIf="users">
   <li *ngFor="let each of users">
-    <a [routerLink]="['/user', each.user.Id]" routerLinkActive="active">
+    <a [routerLink]="['/user', each.user.Id]" routerLinkActive="active" [attr.data-player-rank]="each.user.Ranking">
       <pssr-render-small-ship *ngIf="each.ship" [ship]="each.ship"></pssr-render-small-ship>
       <div class="user-info">
         <h2>#{{each.user.Ranking}}</h2>
