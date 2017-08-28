@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Input, HostBinding, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { User, UserBrief, Ship } from '../../model/model.module';
@@ -12,6 +12,8 @@ import { ShipByUserService } from '../../service/ship/ship-service.module';
   styleUrls: ['./top100.component.scss']
 })
 export class Top100RouteComponent implements OnInit {
+  @Input() @HostBinding('class.expanded') expanded = false;
+
   public users: {user: User, ship: Ship}[];
 
   constructor(

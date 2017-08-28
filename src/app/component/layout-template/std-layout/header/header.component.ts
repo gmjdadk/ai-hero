@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
+
+import * as Headspace from 'headspace';
 
 @Component({
   selector: 'pssr-layout-header',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private element: ElementRef) { }
 
   ngOnInit() {
+    Headspace(this.element.nativeElement, {
+      startOffset: 80,
+      classNames: {
+        base: 'header',
+        fixed: 'header--fixed',
+        hidden: 'header--hidden'
+      }
+    });
   }
 
 }

@@ -7,6 +7,27 @@
     z-index: 10;
 }
 
+// Headspace styles (show/hide on scroll up/down)
+
+:host.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: transform 0.2s ease-in-out, background .3s ease-in-out;
+}
+
+:host.header--hidden {
+    transform: translate3d(0, -8rem, 0); /* y value should be -1 * height */
+}
+
+:host.header--fixed {
+    position: fixed;
+    background: rgba(0, 0, 0, .8);
+}
+
+// Others
+
 :host /deep/ > * {
     display: block;
     max-width: 1024px;
