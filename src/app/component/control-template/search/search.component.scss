@@ -1,4 +1,9 @@
 :host {
+    // FIXME: This breaks mobile.
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+
     cursor: pointer;
     position: relative;
     box-sizing: border-box;
