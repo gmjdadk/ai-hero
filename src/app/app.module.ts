@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PixelStarshipsAPIInterceptorBackend } from './interceptor/interceptor.module';
 import { PSSRLayoutTemplateComponentModule } from './component/layout-template/layout-template.module';
+import { PSSRControlTemplateComponentModule } from './component/control-template/control-template.module';
 
 import { PSSRDataServiceModule } from './service/data/data-service.module';
 import { PSSRDeviceServiceModule } from './service/device/device-service.module';
@@ -32,6 +33,7 @@ import { PSSRUserServiceModule } from './service/user/user-service.module';
     // PSSR Modules
     AppRoutingModule,
     PSSRLayoutTemplateComponentModule,
+    PSSRControlTemplateComponentModule,
     // Services
     PSSRDataServiceModule,
     PSSRDeviceServiceModule,

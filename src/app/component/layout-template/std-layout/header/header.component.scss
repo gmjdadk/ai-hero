@@ -7,6 +7,23 @@
     z-index: 10;
 }
 
+:host /deep/ > layout-header {
+    display: block;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+// Flow nav lists horizontally
+
+:host /deep/ nav > ul {
+    padding: 0;
+    margin: 0;
+
+    & li {
+        display: inline-block;
+    }
+}
+
 // Headspace styles (show/hide on scroll up/down)
 
 :host.header {
@@ -23,53 +40,5 @@
 
 :host.header--fixed {
     position: fixed;
-    background: rgba(0, 0, 0, .8);
-}
-
-// Others
-
-:host /deep/ > * {
-    display: block;
-    max-width: 1024px;
-    margin: 0 auto;
-}
-
-:host /deep/ ul {
-    padding: 0;
-    margin: 0;
-}
-
-:host /deep/ ul > li {
-    display: inline-block;
-    
-    & > a {
-        display: block;
-        position: relative;
-        padding: 14px 0;
-        margin: 36px 20px;
-        font-family: 'ArcaMajora3-Bold', sans-serif;
-        font-size: 13px;
-        text-transform: uppercase;
-        font-weight: normal;
-        letter-spacing: 6px;
-        text-decoration: none;
-        color: #fff;
-
-        &:after {
-            content: " ";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 5px;
-        }
-
-        &:hover:after {
-            border-bottom: 1px solid #c1c6cc;
-        }
-
-        &.active:after {
-            border-bottom: 1px solid #fff;
-        }
-    }
+    background: #212121;
 }

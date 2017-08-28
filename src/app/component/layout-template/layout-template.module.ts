@@ -7,7 +7,7 @@ import * as StdLayout from './std-layout/layout.component';
 
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule
   ],
   declarations: [
     // Layout Interface

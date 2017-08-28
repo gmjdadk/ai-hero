@@ -1,0 +1,29 @@
+:host {
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+    padding: 14px 0 14px 30px;
+    background: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cg%3E%3Cpath d=%22M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z%22 fill=%22%23FFFFFF%22%3E%3C/path%3E%3C/g%3E%3C/svg%3E');
+    background-repeat: repeat;
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: auto auto;
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 32px 32px;
+    border: none;
+    font-size: 16px;
+    color: #fff;
+
+    text-indent: .75rem;
+    font-size: 20px;
+    line-height: 20px;
+    margin: 34px 20px;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom-color .3s ease-in-out;
+
+    &:active, &:focus {
+        cursor: text;
+        border-bottom: 1px solid #c1c6cc;
+    }
+}

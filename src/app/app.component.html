@@ -1,12 +1,15 @@
 <pssr-std-layout>
   <layout-header>
-    <ul class="left">
+    <div class="left">
+      <input pssr-input-search type="text" />
       <!--<li><a [routerLink]="['user', 1293486]" routerLinkActive="active">White Worf</a></li>-->
-    </ul>
-    <ul class="right">
-      <li><a [routerLink]="['all']" routerLinkActive="active">All</a></li>
-      <li><a [routerLink]="['top100']" routerLinkActive="active">Top 100</a></li>
-    </ul>
+    </div>
+    <nav class="right">
+      <ul>
+        <li><a pssr-a-nav-item [routerLink]="['all']" routerLinkActive="active">All</a></li>
+        <li><a pssr-a-nav-item [routerLink]="['top100']" routerLinkActive="active">Top 100</a></li>
+      </ul>
+    </nav>
   </layout-header>
 
   <layout-content>
