@@ -3,13 +3,12 @@
     display: block;
     width: 100vw;
     top: 0;
-    height: 8rem;
     z-index: 10;
 }
 
 :host /deep/ > layout-header {
     display: block;
-    max-width: 1024px;
+    max-width: 778px;
     margin: 0 auto;
 }
 
@@ -18,6 +17,7 @@
 :host /deep/ nav > ul {
     padding: 0;
     margin: 0;
+    text-align: center;
 
     & li {
         display: inline-block;

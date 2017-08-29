@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class PixelStarshipsAPIInterceptorBackend extends XHRBackend {
   static readonly API_CHECK_PROD_ENDPOINT = 'https://api.pixelstarships.com/SettingService/GetProductionServer';
+  static readonly API_FALLBACK_PROD_ENDPOINT = 'api.pixelstarships.com';
   static readonly API_USER_AGENT = 'Pixel%20Starships/56 CFNetwork/811.5.4 Darwin/16.6.0 (x86_64)';
 
   private productionEndpoint: Observable<string>;
@@ -33,6 +34,8 @@ export class PixelStarshipsAPIInterceptorBackend extends XHRBackend {
         })
       ).response
       .map(res => res.text())
+      .map(res => /^(.*).pixelstarships.com$/.test(res)
+          ? res : PixelStarshipsAPIInterceptorBackend.API_FALLBACK_PROD_ENDPOINT)
       .map(host => ['https://', host, '/'].join(''))
       .publishReplay(1)
       .refCount();
