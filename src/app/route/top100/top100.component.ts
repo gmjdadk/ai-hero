@@ -87,7 +87,9 @@ export class Top100RouteComponent implements OnInit {
   }
 
   get renderSizeOfResults(): string {
-    if (!this.users) return ' (fetching...)'
+    if (!this.users) {
+      return ' (fetching...)';
+    }
     return this.users.length === 1
       ? ' (1 result)'
       : [' (', this.users.length, ' results)'].join('');
