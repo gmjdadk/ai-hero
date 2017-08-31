@@ -2,40 +2,15 @@
   <layout-header>
     <nav>
       <ul>
-        <li><a pssr-a-nav-item [routerLink]="['all']" routerLinkActive="active">All</a></li>
+        <li><a pssr-a-nav-item [routerLink]="['top100']">All</a></li>
+        <!-- For the time being ... this all needs to be refactored .. -->
+        <!--<li><a pssr-a-nav-item [routerLink]="['top100']" routerLinkActive="active">Top 100</a></li>-->
         <li><a pssr-a-nav-item [routerLink]="['top100']" routerLinkActive="active">Top 100</a></li>
       </ul>
     </nav>
   </layout-header>
 
   <layout-content>
-    <div style="text-align: center; background: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cg%3E%3Cpath d=%22M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z%22 fill=%22%23FFFFFF%22%3E%3C/path%3E%3C/g%3E%3C/svg%3E') no-repeat; height: 35vh; background-position: center 100%; background-size: 32px 32px;">
-      <h1 style="font-family:'ArcaMajora3-Bold', sans-serif; font-size: 22px; margin-top:30vh; text-transform:uppercase;letter-spacing: 6px;text-align: center;">
-        <span>Search approx </span>1.43m ships
-      </h1>
-      <input type="text" style="width: 240px;
-      max-width: 100%;
-      box-sizing: border-box;
-      padding: 6px 0 6px 30px;
-      background: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cg%3E%3Cpath d=%22M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z%22 fill=%22%23FFFFFF%22%3E%3C/path%3E%3C/g%3E%3C/svg%3E');
-          background-repeat: repeat;
-          background-position-x: 0%;
-          background-position-y: 0%;
-          background-size: auto auto;
-      background-repeat: no-repeat;
-      background-position: left center;
-      background-size: 24px 24px;
-      border: none;
-          border-bottom-width: medium;
-          border-bottom-style: none;
-          border-bottom-color: currentcolor;
-      border-bottom: 1px solid #FFF;
-      border-radius: 0;
-      font-size: 16px;
-      margin-top: 24px;
-      color: #FFF;" />
-    </div>
-    <h2 style="text-align:center; font-family:'ArcaMajora3-Bold', sans-serif; font-size: 14px; text-transform:uppercase; letter-spacing: 2px;margin-top: 0;margin-bottom: 2rem;">Press to Inspect (100 results)</h2>
     <router-outlet></router-outlet>
   </layout-content>
 </pssr-std-layout>
