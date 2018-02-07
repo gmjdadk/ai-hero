@@ -20,7 +20,7 @@
     "@angular/http": "^4.0.0",
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
-    "@angular/router": "^4.0.0",
+    "@angular/router": "^5.2.4",
     "angular-persistence": "^1.0.1",
     "angulartics2": "^2.3.0",
     "class-transformer": "^0.1.7",
